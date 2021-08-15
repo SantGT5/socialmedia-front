@@ -7,14 +7,20 @@ import { AuthContextComponent } from "../contexts/authContext";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Login from "./Login";
+import PersonalInfo from "./PersonalInfo";
+import EditUser from "./EditUser";
 
 function App() {
   return (
     <BrowserRouter>
+    
       <Switch>
+      
         <AuthContextComponent>
 
             <PrivateRoute exact path="/" component={NavBar} />
+            <Route path="/personal-info" component={PersonalInfo} />
+            <Route path="/edit/:id" component={EditUser} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Redirect exact from="/login" to="/" />
