@@ -10,10 +10,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from "@material-ui/icons/Email";
 
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import React from "react";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -27,6 +27,8 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import Button from "@material-ui/core/Button";
 import ClearIcon from "@material-ui/icons/Clear";
+
+import Snackbar from "@material-ui/core/Snackbar";
 
 import { useHistory, useParams } from "react-router";
 
@@ -59,11 +61,13 @@ function EditUser(props) {
     gender: "",
   });
 
-console.log("status", status)
+  const arrGender = ["Male", "Female", "Other"];
 
   const [open, setOpen] = React.useState(false);
 
   const [error, setErro] = useState(null);
+
+  const [mensage, setMensage] = React.useState(false);
 
   const handleChange = (event) => {
     setStatus({
@@ -76,7 +80,9 @@ console.log("status", status)
     async function fetchEdit() {
       try {
         const response = await api.get("/profile");
+
         delete response.data._id;
+
         setStatus({ ...response.data });
       } catch (err) {
         console.log(err);
@@ -106,15 +112,26 @@ console.log("status", status)
   async function handleSubmit(event) {
     event.preventDefault(props);
     try {
-      const response = await api.put(`/edite/${id}`, {...status});
+      const response = await api.put(`/edite/${id}`, { ...status });
 
-      history.push("/personal-info");
+      setMensage(true);
+
+      setErro(null);
+
+      setTimeout(() => {
+        handleCloseMensage();
+      }, 1500);
     } catch (err) {
       if (err.response && err.response.data.msg) {
         setErro(err.response.data.msg);
       }
     }
   }
+
+  const handleCloseMensage = (event, reason) => {
+    setMensage(false);
+    history.push("/personal-info");
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -188,7 +205,24 @@ console.log("status", status)
               </Grid>
             </Grid>
             <div>
-              <FormControl className={classes.formControl}>
+              <select
+                className="container form-select"
+                style={{ marginTop: "2em", width: "10em" }}
+                aria-label="Default select example"
+                value={status.gender}
+                onChange={handleChange}
+                name="gender"
+              >
+                {arrGender.map((text, i) => {
+                  return (
+                    <option key={i} value={text}>
+                      {text}
+                    </option>
+                  );
+                })}
+              </select>
+
+              {/* <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Gender
                 </InputLabel>
@@ -200,18 +234,16 @@ console.log("status", status)
                   onChange={handleChange}
                   name="gender"
                 >
-                  <option key={0} name="gender" defaultValue="Male">
-                    Male
-                  </option>
-                  <option key={1} name="gender" defaultValue="Female">
-                    Female
-                  </option>
-                  <option key={2} name="gender" defaultValue="Other">
-                    Other
-                  </option>
+                  {arrGender.map((text, i) => {
+                    return (
+                      <MenuItem key={i} value={text}>
+                        {text}
+                      </MenuItem>
+                    );
+                  })}
                 </Select>
                 <FormHelperText>Some important helper text</FormHelperText>
-              </FormControl>
+              </FormControl> */}
             </div>
           </div>
         </div>
@@ -268,8 +300,8 @@ console.log("status", status)
         </Dialog>
       </div>
 
-      <div className="alertMSG">
-        {error ? 
+      <div className="alertMSG" style={{ marginTop: "2em" }}>
+        {error ? (
           <div>
             <Alert severity="warning">
               {" "}
@@ -277,10 +309,24 @@ console.log("status", status)
               <strong>check it out!</strong>{" "}
             </Alert>
           </div>
-        : 
+        ) : (
           <></>
-        }
+        )}
       </div>
+
+      {/* <Button variant="outlined" onClick={handleMensage}>
+        Open success snackbar
+      </Button> */}
+
+      <Snackbar open={mensage}>
+        <Alert
+          onClose={handleCloseMensage}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </form>
   );
 }

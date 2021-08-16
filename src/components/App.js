@@ -2,6 +2,7 @@ import "../App.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import PrivateRoute from "../RouterComponents/auth/PrivateRouter";
 import { AuthContextComponent } from "../contexts/authContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 // import { CartContextComponent } from "../contexts/cardContext";
 
 import NavBar from "./NavBar";

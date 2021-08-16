@@ -80,7 +80,6 @@ console.log("profile", profile)
             </Grid>
             <Grid item>
               <TextField
-                id="input-with-icon-grid"
                 label="Name"
                 value={profile.name}
               />
@@ -98,7 +97,6 @@ console.log("profile", profile)
             </Grid>
             <Grid item>
               <TextField
-                id="input-with-icon-grid"
                 label="Username"
                 value={profile.profileName}
               />
@@ -116,7 +114,6 @@ console.log("profile", profile)
             </Grid>
             <Grid item>
               <TextField
-                id="input-with-icon-grid"
                 label="E-mail"
                 value={profile.email}
               />
