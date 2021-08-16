@@ -5,27 +5,26 @@ import { AuthContextComponent } from "../contexts/authContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { CartContextComponent } from "../contexts/cardContext";
 
-import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Login from "./Login";
 import PersonalInfo from "./PersonalInfo";
 import EditUser from "./EditUser";
+import Home from "./Home";
+import NewPost from "./NewPost";
+import GlobalCard from "./GlobalCard";
 
 function App() {
   return (
     <BrowserRouter>
-    
       <Switch>
-      
         <AuthContextComponent>
-
-            <PrivateRoute exact path="/" component={NavBar} />
-            <Route path="/personal-info" component={PersonalInfo} />
-            <Route path="/edit/:id" component={EditUser} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Redirect exact from="/login" to="/" />
-
+          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute path="/personal-info" component={PersonalInfo} />
+          <Route path="/edit/:id" component={EditUser} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/newpost" component={NewPost} />
+          <Route path="/login" component={Login} />
+          <Redirect exact from="/login" to="/" />
         </AuthContextComponent>
       </Switch>
     </BrowserRouter>

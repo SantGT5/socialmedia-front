@@ -31,7 +31,7 @@ function PersonalInfo() {
     gender: "",
   });
 
-console.log("profile", profile)
+  console.log("profile", profile);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -49,6 +49,7 @@ console.log("profile", profile)
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
   const id = loggedInUser.user._id;
+
   const history = useHistory();
 
   async function handleClick() {
@@ -79,10 +80,7 @@ console.log("profile", profile)
               <AccountCircle />
             </Grid>
             <Grid item>
-              <TextField
-                label="Name"
-                value={profile.name}
-              />
+              <TextField label="Name" value={profile.name} />
             </Grid>
           </Grid>
 
@@ -96,10 +94,7 @@ console.log("profile", profile)
               <AccountCircle />
             </Grid>
             <Grid item>
-              <TextField
-                label="Username"
-                value={profile.profileName}
-              />
+              <TextField label="Username" value={profile.profileName} />
             </Grid>
           </Grid>
 
@@ -113,10 +108,7 @@ console.log("profile", profile)
               <EmailIcon />
             </Grid>
             <Grid item>
-              <TextField
-                label="E-mail"
-                value={profile.email}
-              />
+              <TextField label="E-mail" value={profile.email} />
             </Grid>
           </Grid>
 
