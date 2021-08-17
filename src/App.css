@@ -87,17 +87,25 @@
   margin-bottom: 3em;
 }
 
-#IconHome{
+#IconHome {
   position: fixed;
   bottom: 0.5rem;
   right: 0.5rem;
 }
 
-.imgNewPost{
+.imgNewPost {
+  min-height: 30em;
+  min-width: 22em;
+  max-height: 30em;
+  max-width: 22em;
+  object-fit: cover;
+}
 
-
-
-
-  max-height: 20em;
-  max-width: 30em;
+.imgNull{
+  min-height: 30em;
+  min-width: 22em;
+  max-height: 30em;
+  max-width: 22em;
+  object-fit: cover;
+  border: rgb(184, 171, 153) solid;
 }
