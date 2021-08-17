@@ -29,17 +29,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GoogleMaps() {
+export default function GoogleMaps(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
 
+  
+
+
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBwRp1e12ec1vOTtGiA4fcCt2sCUS78UYc&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyChTcMUCY9Zw3j00st0uKkqTz0RGlOpea8&libraries=places',
         document.querySelector('head'),
         'google-maps',
       );
@@ -67,7 +69,7 @@ export default function GoogleMaps() {
     }
 
     if (inputValue === '') {
-      setOptions(value ? [value] : []);
+      setOptions(props.value ? [props.value] : []);
       return undefined;
     }
 
@@ -75,8 +77,8 @@ export default function GoogleMaps() {
       if (active) {
         let newOptions = [];
 
-        if (value) {
-          newOptions = [value];
+        if (props.value) {
+          newOptions = [props.value];
         }
 
         if (results) {
@@ -90,7 +92,7 @@ export default function GoogleMaps() {
     return () => {
       active = false;
     };
-  }, [value, inputValue, fetch]);
+  }, [props.value, inputValue, fetch]);
 
   return (
     <Autocomplete
@@ -102,10 +104,10 @@ export default function GoogleMaps() {
       autoComplete
       includeInputInList
       filterSelectedOptions
-      value={value}
+      value={props.value}
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
+        props.setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);

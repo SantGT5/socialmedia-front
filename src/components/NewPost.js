@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import userImg from "../img/Sem Título.png";
 import TextField from "@material-ui/core/TextField";
+import React from 'react';
 
 import GoogleLocation from "./GoogleLocation"
 
@@ -24,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
 function NewPost() {
   const classes = useStyles();
 
+  const [value, setValue] = React.useState(null);
+
   const [img, setImg] = useState({ file: null });
 
   async function handleImage(event) {
@@ -34,7 +37,7 @@ function NewPost() {
     }
   }
 
-  console.log("img -> ", img);
+  console.log( "dentro do NewPost -> ", value.description )
   return (
     <div>
       <div>
@@ -84,7 +87,10 @@ function NewPost() {
               />
             </div>
             <div className="p-2 bd-highlight">
-<GoogleLocation />
+<GoogleLocation
+value={ value }
+setValue={ setValue }
+/>
             </div>
 
 
