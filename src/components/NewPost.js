@@ -7,6 +7,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import UserTag from "./UserTag"
 
 
 import GoogleLocation from "./GoogleLocation";
@@ -35,8 +36,7 @@ function NewPost() {
       console.log(err);
     }
   }
-
-  console.log("dentro do NewPost -> ", value);
+  
   return (
     <div>
       <div>
@@ -99,6 +99,12 @@ function NewPost() {
             <div className="p-2 bd-highlight">
               <GoogleLocation value={value} setValue={setValue} />
             </div>
+
+            <div className="p-2 bd-highlight">
+              <UserTag />
+            </div>
+
+
           </div>
         </div>
       </div>
