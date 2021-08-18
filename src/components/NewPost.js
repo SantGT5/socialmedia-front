@@ -3,12 +3,13 @@ import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import userImg from "../img/Sem Título.png";
 import TextField from "@material-ui/core/TextField";
-import React from 'react';
+import React from "react";
+import Box from "@material-ui/core/Box";
 
-import GoogleLocation from "./GoogleLocation"
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
-// import GlobalCard from "./GlobalCard";
 
+import GoogleLocation from "./GoogleLocation";
 import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,9 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NewPost() {
   const classes = useStyles();
-
   const [value, setValue] = React.useState(null);
-
   const [img, setImg] = useState({ file: null });
 
   async function handleImage(event) {
@@ -37,7 +36,7 @@ function NewPost() {
     }
   }
 
-  console.log( "dentro do NewPost -> ", value.description )
+  console.log("dentro do NewPost -> ", value);
   return (
     <div>
       <div>
@@ -45,7 +44,7 @@ function NewPost() {
       </div>
 
       <div
-        style={{ marginBottom: "2em" }}
+        style={{ marginBottom: "1em" }}
         className="d-flex justify-content-center"
       >
         {/* <GlobalCard
@@ -72,29 +71,34 @@ function NewPost() {
                 onChange={handleImage}
               />
               <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Insert Photo
+                <Button style={{ borderRadius:"20px", height:"4em" }} variant="contained" color="primary" component="span">
+                  <AddAPhotoIcon style={{ height:"1.3em", width:"auto" }} />
                 </Button>
               </label>
             </div>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <form className={classes.root} noValidate autoComplete="off">
+                <TextField
+                style={{ width:"18.7em" }}
+                  id="outlined-multiline-static"
+                  label="Description"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                />
+              </form>
+            </Box>
+
             <div className="p-2 bd-highlight">
-              <TextField
-                className="p-2 bd-highlight"
-                id="outlined-multiline-static"
-                label="Description"
-                multiline
-                rows={4}
-              />
+              <GoogleLocation value={value} setValue={setValue} />
             </div>
-            <div className="p-2 bd-highlight">
-<GoogleLocation
-value={ value }
-setValue={ setValue }
-/>
-            </div>
-
-
-
           </div>
         </div>
       </div>
