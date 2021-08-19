@@ -71,15 +71,15 @@ function NewPost() {
         }
       }
 
-      const mapLocation = value.description;
-
       const postImgURL = await handleFileUpload(img.postImg);
+
+      console.log("img.postImg -> ", img.postImg)
 
       const response = await api.post(`/newpost`, {
         ...des,
         addLocation: value.description,
         tagUser: newArr,
-        postImgURL: postImgURL,
+        postImgURL,
       });
     } catch (err) {
       console.log(err.response);
@@ -97,7 +97,7 @@ function NewPost() {
       </div>
 
       <div
-        style={{ marginBottom: "1em" }}
+        style={{ marginBottom: "0.6em" }}
         className="d-flex justify-content-center"
       >
         {/* <GlobalCard
@@ -125,12 +125,12 @@ function NewPost() {
               />
               <label htmlFor="contained-button-file">
                 <Button
-                  style={{ borderRadius: "20px", height: "4em" }}
+                  style={{ borderRadius: "20px", height: "4em", marginBottom:"2em" }}
                   variant="contained"
                   color="primary"
                   component="span"
                 >
-                  <AddAPhotoIcon style={{ height: "1.3em", width: "auto" }} />
+                  <AddAPhotoIcon style={{ height: "1.3em", width: "11.2em" }} />
                 </Button>
               </label>
             </div>
@@ -145,7 +145,7 @@ function NewPost() {
             >
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField
-                  style={{ width: "18.7em" }}
+                  style={{ width: "18.7em", marginBottom:"1em" }}
                   id="outlined-multiline-static"
                   label="Description"
                   multiline
@@ -158,17 +158,16 @@ function NewPost() {
               </form>
             </Box>
 
-            <div className="p-2 bd-highlight">
+            <div className="p-2 bd-highlight" style={{ marginBottom:"1em" }}>
               <GoogleLocation value={value} setValue={setValue} />
             </div>
 
-            <div className="p-2 bd-highlight">
+            <div className="p-2 bd-highlight" style={{ marginBottom:"1em" }}>
               <UserTag onChange={handleChange} />
             </div>
 
             <Button
               className="p-2 bd-highlight"
-              style={{ marginLeft: "0.5em", marginRight: "0.5em" }}
               variant="contained"
               endIcon={<PublishIcon />}
               type="submit"
