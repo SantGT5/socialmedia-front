@@ -5,10 +5,11 @@ import userImg from "../img/Sem Título.png";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import Box from "@material-ui/core/Box";
+import PublishIcon from "@material-ui/icons/Publish";
 
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import UserTag from "./UserTag"
-
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import UserTag from "./UserTag";
+import api from "../apis/api";
 
 import GoogleLocation from "./GoogleLocation";
 import NavBar from "./NavBar";
@@ -26,19 +27,81 @@ const useStyles = makeStyles((theme) => ({
 
 function NewPost() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [img, setImg] = useState({ file: null });
+  const [des, setDes] = useState({ description: "" });
+  const [value, setValue] = React.useState({addLocation: ""});
+  const [img, setImg] = useState({ file: null, img: null });
+  const [listTag, setListTag] = useState({});
+
+  console.log("des -> ", des);
+  console.log("value -> ", value);
+  console.log("img -> ", img);
+  console.log("listTag -> ", listTag);
 
   async function handleImage(event) {
     try {
-      setImg({ file: URL.createObjectURL(event.target.files[0]) });
+      setImg({
+        file: URL.createObjectURL(event.target.files[0]),
+        img: event.target.value,
+      });
     } catch (err) {
       console.log(err);
     }
   }
-  
+
+  const handleChange = (event, values) => {
+    setListTag([values]);
+  };
+
+
+
+
+
+
+
+
+
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+
+    try {
+      let newArr = []
+
+      for(let list of listTag){
+        for(let result of list){
+        newArr.push( result.tagUser )
+      
+      }}
+
+            console.log("des -> ", des)
+            console.log("newArr -> ", newArr)
+
+const mapLocation = value.description
+console.log("mapLocation -> ", mapLocation)
+
+      const response = await api.post(`/newpost`, { ...des,  addLocation: value.description, tagUser: newArr });
+
+
+      console.log("response NewPost -> ", response.data);
+
+    } catch (err) {
+      console.log(err.response);
+    }
+  }
+
+
+
+
+
+
+
+
+  const handleChangeDes = (event) => {
+    setDes({ [event.target.name]: event.target.value });
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <div>
         <NavBar />
       </div>
@@ -71,8 +134,13 @@ function NewPost() {
                 onChange={handleImage}
               />
               <label htmlFor="contained-button-file">
-                <Button style={{ borderRadius:"20px", height:"4em" }} variant="contained" color="primary" component="span">
-                  <AddAPhotoIcon style={{ height:"1.3em", width:"auto" }} />
+                <Button
+                  style={{ borderRadius: "20px", height: "4em" }}
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                >
+                  <AddAPhotoIcon style={{ height: "1.3em", width: "auto" }} />
                 </Button>
               </label>
             </div>
@@ -86,12 +154,15 @@ function NewPost() {
             >
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField
-                style={{ width:"18.7em" }}
+                  style={{ width: "18.7em" }}
                   id="outlined-multiline-static"
                   label="Description"
                   multiline
                   rows={4}
                   variant="outlined"
+                  onChange={handleChangeDes}
+                  name="description"
+                  value={des.description}
                 />
               </form>
             </Box>
@@ -101,14 +172,22 @@ function NewPost() {
             </div>
 
             <div className="p-2 bd-highlight">
-              <UserTag />
+              <UserTag onChange={handleChange} />
             </div>
 
-
+            <Button
+              className="p-2 bd-highlight"
+              style={{ marginLeft: "0.5em", marginRight: "0.5em" }}
+              variant="contained"
+              endIcon={<PublishIcon />}
+              type="submit"
+            >
+              Post
+            </Button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

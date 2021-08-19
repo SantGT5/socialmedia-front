@@ -14,20 +14,17 @@ import api from "../apis/api";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function CheckboxesTags() {
+export default function CheckboxesTags(props) {
 
 
 
   const [tag, setTag] = useState([]);
-  const [listTag, setListTag] = useState();
+  
 
 
   const mapTags = tag.map((elem, i) => {
-    return  {tags: elem.profileName, key:i}
+    return  { tagUser: elem.profileName }
   });
-
-
-  console.log("listTag -> ", listTag)
 
   useEffect(() => {
     async function fetchTag() {
@@ -42,9 +39,7 @@ export default function CheckboxesTags() {
   }, []);
 
 
-const handleChange = (event, values) => {
-    setListTag( values )
-}
+
 
 
   return (
@@ -53,20 +48,20 @@ const handleChange = (event, values) => {
       id="checkboxes-tags-demo"
       options={mapTags}
       disableCloseOnSelect
-      getOptionLabel={(option) => option.tags}
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
+      getOptionLabel={(option) => option.tagUser}
+      renderOption={(option, { selected }) => (
+        <li>
           <Checkbox
             icon={icon}
             checkedIcon={checkedIcon}
             style={{ marginRight: 8 }}
             checked={selected}
           />
-          {option.title}
+          {option.tagUser}
         </li>
       )}
-      onChange={ handleChange }
-      style={{ width: 500 }}
+      onChange={ props.onChange }
+      style={{ width: 300 }}
       renderInput={(params, i) => (
         //   console.log( params.InputProps.startAdornment[0].props.label ),
         //   {params.InputProps.startAdornment[i].props.label},

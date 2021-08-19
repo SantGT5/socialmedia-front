@@ -22,7 +22,7 @@ function App() {
           <PrivateRoute path="/personal-info" component={PersonalInfo} />
           <Route path="/edit/:id" component={EditUser} />
           <Route path="/signup" component={Signup} />
-          <Route path="/newpost" component={NewPost} />
+          <Route exact path="/newpost" component={NewPost} />
           <Route path="/login" component={Login} />
           <Redirect exact from="/login" to="/" />
         </AuthContextComponent>
