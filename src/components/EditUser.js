@@ -8,12 +8,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from "@material-ui/icons/Email";
-
-// import InputLabel from "@material-ui/core/InputLabel";
-// import FormHelperText from "@material-ui/core/FormHelperText";
-// import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
-// import MenuItem from "@material-ui/core/MenuItem";
 import React from "react";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -221,29 +215,6 @@ function EditUser(props) {
                   );
                 })}
               </select>
-
-              {/* <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-helper-label">
-                  Gender
-                </InputLabel>
-
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  value={status.gender}
-                  onChange={handleChange}
-                  name="gender"
-                >
-                  {arrGender.map((text, i) => {
-                    return (
-                      <MenuItem key={i} value={text}>
-                        {text}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-                <FormHelperText>Some important helper text</FormHelperText>
-              </FormControl> */}
             </div>
           </div>
         </div>
@@ -313,10 +284,6 @@ function EditUser(props) {
           <></>
         )}
       </div>
-
-      {/* <Button variant="outlined" onClick={handleMensage}>
-        Open success snackbar
-      </Button> */}
 
       <Snackbar open={mensage}>
         <Alert

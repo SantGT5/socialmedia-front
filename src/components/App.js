@@ -11,7 +11,6 @@ import PersonalInfo from "./PersonalInfo";
 import EditUser from "./EditUser";
 import Home from "./Home";
 import NewPost from "./NewPost";
-import GlobalCard from "./GlobalCard";
 
 function App() {
   return (

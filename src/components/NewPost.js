@@ -28,73 +28,63 @@ const useStyles = makeStyles((theme) => ({
 function NewPost() {
   const classes = useStyles();
   const [des, setDes] = useState({ description: "" });
-  const [value, setValue] = React.useState({addLocation: ""});
-  const [img, setImg] = useState({ file: null, img: null });
+  const [value, setValue] = React.useState({ addLocation: "" });
+  const [img, setImg] = useState({ file: null, postImg: null });
   const [listTag, setListTag] = useState({});
 
-  console.log("des -> ", des);
-  console.log("value -> ", value);
-  console.log("img -> ", img);
-  console.log("listTag -> ", listTag);
-
   async function handleImage(event) {
-    try {
+    if (event.target.files.length) {
       setImg({
         file: URL.createObjectURL(event.target.files[0]),
-        img: event.target.value,
+        postImg: event.target.files[0],
       });
+    }
+    try {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async function handleFileUpload(file) {
+    const uploadData = new FormData();
+
+    uploadData.append("postImg", file);
+
+    const response = await api.post("/upload", uploadData);
+
+    return response.data.url;
   }
 
   const handleChange = (event, values) => {
     setListTag([values]);
   };
 
-
-
-
-
-
-
-
-
-
   async function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      let newArr = []
+      let newArr = [];
 
-      for(let list of listTag){
-        for(let result of list){
-        newArr.push( result.tagUser )
-      
-      }}
+      for (let list of listTag) {
+        for (let result of list) {
+          newArr.push(result.tagUser);
+        }
+      }
 
-            console.log("des -> ", des)
-            console.log("newArr -> ", newArr)
+      const mapLocation = value.description;
 
-const mapLocation = value.description
-console.log("mapLocation -> ", mapLocation)
+      const postImgURL = await handleFileUpload(img.postImg);
 
-      const response = await api.post(`/newpost`, { ...des,  addLocation: value.description, tagUser: newArr });
-
-
-      console.log("response NewPost -> ", response.data);
-
+      const response = await api.post(`/newpost`, {
+        ...des,
+        addLocation: value.description,
+        tagUser: newArr,
+        postImgURL: postImgURL,
+      });
     } catch (err) {
       console.log(err.response);
     }
   }
-
-
-
-
-
-
-
 
   const handleChangeDes = (event) => {
     setDes({ [event.target.name]: event.target.value });
@@ -144,6 +134,7 @@ console.log("mapLocation -> ", mapLocation)
                 </Button>
               </label>
             </div>
+
             <Box
               component="form"
               sx={{
