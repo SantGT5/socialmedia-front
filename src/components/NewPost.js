@@ -32,6 +32,8 @@ function NewPost() {
   const [img, setImg] = useState({ file: null, postImg: null });
   const [listTag, setListTag] = useState({});
 
+console.log("des -> ", des)
+
   async function handleImage(event) {
     if (event.target.files.length) {
       setImg({
@@ -73,8 +75,6 @@ function NewPost() {
 
       const postImgURL = await handleFileUpload(img.postImg);
 
-      console.log("img.postImg -> ", img.postImg)
-
       const response = await api.post(`/newpost`, {
         ...des,
         addLocation: value.description,
@@ -82,7 +82,7 @@ function NewPost() {
         postImgURL,
       });
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   }
 
