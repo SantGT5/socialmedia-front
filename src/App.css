@@ -89,8 +89,8 @@
 
 #IconHome {
   position: fixed;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .imgNewPost {
@@ -108,4 +108,9 @@
   max-width: 22em;
   object-fit: cover;
   border: rgb(184, 171, 153) solid;
+}
+
+
+.allPost{
+  align-items: center;
 }
