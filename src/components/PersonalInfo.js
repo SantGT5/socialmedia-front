@@ -31,8 +31,6 @@ function PersonalInfo() {
     gender: "",
   });
 
-  console.log("profile", profile);
-
   useEffect(() => {
     async function fetchProfile() {
       try {

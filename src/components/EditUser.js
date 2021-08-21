@@ -87,7 +87,7 @@ function EditUser(props) {
 
   async function handleClick() {
     try {
-      history.push("/personal-info");
+      history.push("/");
     } catch (err) {
       console.log(err);
     }

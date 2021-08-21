@@ -2,7 +2,6 @@
 
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import Chip from "@material-ui/core/Chip";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
@@ -18,7 +17,7 @@ export default function CheckboxesTags(props) {
   const [tag, setTag] = useState([]);
 
   const mapTags = tag.map((elem, i) => {
-    return { tagUser: elem.profileName };
+    return elem.profileName
   });
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export default function CheckboxesTags(props) {
       id="checkboxes-tags-demo"
       options={mapTags}
       disableCloseOnSelect
-      getOptionLabel={(option) => option.tagUser}
+      getOptionLabel={(option) => option}
       renderOption={(option, { selected }) => (
         <li>
           <Checkbox
@@ -48,7 +47,7 @@ export default function CheckboxesTags(props) {
             style={{ marginRight: 8 }}
             checked={selected}
           />
-          {option.tagUser}
+          {option}
         </li>
       )}
       onChange={props.onChange}
@@ -56,7 +55,7 @@ export default function CheckboxesTags(props) {
       renderInput={(params, i) => (
         //   console.log( params.InputProps.startAdornment[0].props.label ),
         //   {params.InputProps.startAdornment[i].props.label},
-        <TextField {...params} label="Checkboxes" placeholder="Favorites" />
+        <TextField {...params} label="@TagSomeone" placeholder="@Tags" />
       )}
     />
   );
