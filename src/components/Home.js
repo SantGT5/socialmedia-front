@@ -36,7 +36,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div >
       <NavBar />
       <div className="d-flex justify-content-center">
         <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>

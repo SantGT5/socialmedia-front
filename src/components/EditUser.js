@@ -56,11 +56,8 @@ function EditUser(props) {
   });
 
   const arrGender = ["Male", "Female", "Other"];
-
   const [open, setOpen] = React.useState(false);
-
   const [error, setErro] = useState(null);
-
   const [mensage, setMensage] = React.useState(false);
 
   const handleChange = (event) => {

@@ -11,11 +11,12 @@ import PersonalInfo from "./PersonalInfo";
 import EditUser from "./EditUser";
 import Home from "./Home";
 import NewPost from "./NewPost";
+import Profile from "./Profile";
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
+    <Switch>
         <AuthContextComponent>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/personal-info" component={PersonalInfo} />
@@ -23,9 +24,10 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route exact path="/newpost" component={NewPost} />
           <Route path="/login" component={Login} />
+          <Route path="/profile" component={Profile} />
           <Redirect exact from="/login" to="/" />
         </AuthContextComponent>
-      </Switch>
+      </Switch>      
     </BrowserRouter>
   );
 }

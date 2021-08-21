@@ -12,14 +12,10 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import { useHistory } from "react-router";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
-import LockIcon from '@material-ui/icons/Lock';
-
+import LockIcon from "@material-ui/icons/Lock";
 
 export default function TemporaryDrawer() {
-  const [state, setState] = React.useState({
-    left: false,
-  });
-
+  const [state, setState] = React.useState({ left: false });
   const history = useHistory();
 
   const arrList = [
@@ -45,12 +41,13 @@ export default function TemporaryDrawer() {
     },
   ];
 
-
-  const arrItems =  [{
-    text: "Personal Info",
-    icon: <LockIcon />,
-    onClick: () => history.push("/personal-info")
-  }]
+  const arrItems = [
+    {
+      text: "Personal Info",
+      icon: <LockIcon />,
+      onClick: () => history.push("/personal-info"),
+    },
+  ];
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -93,6 +90,16 @@ export default function TemporaryDrawer() {
           );
         })}
       </List>
+
+      {/* <div>
+
+<List>
+      <ListItem button key="Log out" onClick={handleClickOpen}>
+              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+              <ListItemText primary="Log out" />
+            </ListItem>
+      </List>
+</div> */}
     </Box>
   );
 
@@ -101,7 +108,12 @@ export default function TemporaryDrawer() {
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <MenuIcon
-            style={{ width: "2em", height: "auto", marginLeft: "1em" }}
+            style={{
+              width: "2.8em",
+              height: "auto",
+              marginLeft: "1em",
+              marginTop: "1em",
+            }}
             onClick={toggleDrawer(anchor, true)}
           >
             {anchor}
