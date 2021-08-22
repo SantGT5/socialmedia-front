@@ -1,14 +1,20 @@
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import AddPhotoBTN from "../components/GlobalComponents/AddPhotoBTN";
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import api from "../apis/api";
+import Avatar from "@material-ui/core/Avatar";
 
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 function Signup(props) {
+  const history = useHistory();
+  const [img, setImg] = useState({ file: null, imgUser: null });
+  const arrGender = ["Male", "Female", "Other"];
+  const [error, setError] = useState(null);
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -17,13 +23,31 @@ function Signup(props) {
     gender: "",
   });
 
-  const arrGender = ["Male", "Female", "Other"];
-
   console.log("state -> ", state);
+  console.log("img -> ", img);
 
-  const [error, setError] = useState(null);
+  async function handleImage(event) {
+    if (event.target.files.length) {
+      setImg({
+        file: URL.createObjectURL(event.target.files[0]),
+        imgUser: event.target.files[0],
+      });
+    }
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  const history = useHistory();
+  async function handleFileUpload(file) {
+    const uploadData = new FormData();
+
+    uploadData.append("imgUser", file);
+
+    const response = await api.post("/upload", uploadData);
+
+    return response.data.url;
+  }
 
   function handleChange(event) {
     setState({
@@ -34,9 +58,10 @@ function Signup(props) {
 
   async function handleSubmit(event) {
     event.preventDefault(props);
-
     try {
-      const response = await api.post("/signup", { ...state });
+      const imgUserURL = await handleFileUpload(img.imgUser);
+
+      const response = await api.post("/signup", { ...state, imgUserURL });
 
       history.push("/login");
     } catch (err) {
@@ -50,9 +75,23 @@ function Signup(props) {
   return (
     <form onSubmit={handleSubmit}>
       <h1 className="container">Sign Up</h1>
+
       <Box>
         <div className="container">
           <div className="border">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <AddPhotoBTN onChange={handleImage} color="primary" />
+              <Avatar
+                style={{
+                  marginTop: "0.7em",
+                  marginRight: "3.4em",
+                  width: "5em",
+                  height: "5em",
+                }}
+                src={img.file ? img.file : "/broken-image.jpg"}
+              />
+            </div>
+
             <TextField
               style={{ marginTop: "4%", width: "70%" }}
               onChange={handleChange}

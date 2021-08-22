@@ -26,6 +26,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 
 import { useHistory, useParams } from "react-router";
 
+import AddPhotoBTN from "./GlobalComponents/AddPhotoBTN";
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -53,12 +55,37 @@ function EditUser(props) {
     profileName: "",
     email: "",
     gender: "",
+    imgUserURL: "",
   });
 
   const arrGender = ["Male", "Female", "Other"];
   const [open, setOpen] = React.useState(false);
   const [error, setErro] = useState(null);
   const [mensage, setMensage] = React.useState(false);
+  const [img, setImg] = useState({ file: null, imgUser: null });
+
+  const handleImage = (event) => {
+    if (event.target.files.length) {
+      setImg({
+        file: URL.createObjectURL(event.target.files[0]),
+        imgUser: event.target.files[0],
+      });
+    }
+  };
+
+  async function handleFileUpload(file) {
+    if(file) {
+      const uploadData = new FormData();
+
+      uploadData.append("imgUser", file);
+      
+      const response = await api.post("/uploaduser", uploadData);
+
+      return response.data.url;
+    }
+
+    return status.imgUserURL;
+  }
 
   const handleChange = (event) => {
     setStatus({
@@ -82,13 +109,9 @@ function EditUser(props) {
     fetchEdit();
   }, []);
 
-  async function handleClick() {
-    try {
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const handleClick = () => {
+    history.push("/personal-info");
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -103,7 +126,9 @@ function EditUser(props) {
   async function handleSubmit(event) {
     event.preventDefault(props);
     try {
-      const response = await api.put(`/edite/${id}`, { ...status });
+      const imgUserURL = await handleFileUpload(img.imgUser);
+
+      const response = await api.put(`/edite/${id}`, { ...status, imgUserURL });
 
       setMensage(true);
 
@@ -130,17 +155,13 @@ function EditUser(props) {
       <div>
         <div className="container">
           <Avatar
-            style={{ width: "4em", height: "4em" }}
-            src="/broken-image.jpg"
+            style={{ width: "6.5em", height: "6.5em" }}
+            src={img.file ? img.file : status.imgUserURL}
           />
+          <AddPhotoBTN onChange={handleImage} />
 
           <div className={classes.margin}>
-            <Grid
-              style={{ marginTop: "1em" }}
-              container
-              spacing={1}
-              alignItems="flex-end"
-            >
+            <Grid container spacing={1} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>

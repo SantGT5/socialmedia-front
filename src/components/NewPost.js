@@ -181,6 +181,16 @@ function NewPost() {
       <div className="d-flex justify-content-center">
         <div className="d-flex flex-column bd-highlight mb-3">
           <div className="p-2 bd-highlight">
+
+
+
+
+
+
+
+
+
+
             <div className={classes.root}>
               <input
                 accept="image/*"
@@ -205,6 +215,16 @@ function NewPost() {
                 </Button>
               </label>
             </div>
+
+
+
+
+
+
+
+
+
+
 
             {error ? (
               <div

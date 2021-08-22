@@ -29,6 +29,7 @@ function PersonalInfo() {
     email: "",
     profileName: "",
     gender: "",
+    imgUserURL: "",
   });
 
   useEffect(() => {
@@ -63,8 +64,8 @@ function PersonalInfo() {
       <NavBar />
       <div className="container">
         <Avatar
-          style={{ width: "4em", height: "4em" }}
-          src="/broken-image.jpg"
+          style={{ width: "6.5em", height: "6.5em" }}
+          src={ profile.imgUserURL ? profile.imgUserURL : "/broken-image.jpg" }
         />
 
         <div className={classes.margin}>
