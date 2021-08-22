@@ -1,4 +1,4 @@
-import NavBar from "./NavBar";
+import NavBar from "./GlobalCompoments/NavBar";
 import api from "../apis/api";
 
 import Avatar from "@material-ui/core/Avatar";

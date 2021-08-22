@@ -15,8 +15,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import img from "../img/Sem Título.png"
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -48,7 +46,7 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={ props.userProfileName }
         subheader={ props.addLocation }
       />
       <CardMedia
@@ -72,7 +70,7 @@ export default function RecipeReviewCard(props) {
           <ShareIcon />
         </IconButton>
         <div className="d-flex justify-content-sm-end">
-        <span >Tag people</span>
+        <span >Tag</span>
         </div>
         
         {/* style={{ marginLeft:"13.9em", width:"5.1em" }} */}

@@ -1,34 +1,13 @@
-import NavBar from "./NavBar";
-import GlobalCard from "./GlobalCard";
+import NavBar from "./GlobalCompoments/NavBar";
+import GlobalCard from "./GlobalCompoments/GlobalCard";
 import api from "../apis/api";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-
+import FloatingBTN from "../components/GlobalCompoments/FloatingBTN"
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
 
 function Profile() {
-const classes = useStyles();
-const history = useHistory()
   const [status, setStatus] = useState([]);
 
-
-
-
-  const handleClick = () => {
-    history.push("/newpost")
-  }
 
   useEffect(() => {
     async function fetchProfile() {
@@ -51,7 +30,7 @@ const history = useHistory()
           return (
             <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
               <GlobalCard
-                // title={elem.profileName}
+                userProfileName={elem.userProfileName}
                 addLocation={elem.addLocation}
                 postImgURL={elem.postImgURL}
                 description={elem.description}
@@ -61,11 +40,7 @@ const history = useHistory()
           );
         })}
       </div>
-      <div id="IconHome" className={classes.root}>
-        <Fab onClick={handleClick} color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </div>
+      <FloatingBTN />
     </div>
   );
 }

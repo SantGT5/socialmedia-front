@@ -1,6 +1,3 @@
-// import { useEffect, useState } from "react";
-// import api from "../apis/api";
-import NavBar from "./NavBar";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -22,33 +19,19 @@ function Home() {
   const classes = useStyles();
   const history = useHistory();
 
-  const storedUser = localStorage.getItem("loggedInUser");
-  const loggedInUser = JSON.parse(storedUser || '""');
 
-  async function handleClick() {
-    try {
-
-      history.push("/newpost");
-
-    } catch (err) {
-      console.log(err);
-    }
+  const handleClick = () =>{
+    history.push("/newpost");
   }
 
+
   return (
-    <div >
-      <NavBar />
-      <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
-          @{loggedInUser.user.profileName}
-        </span>
-      </div>
       <div id="IconHome" className={classes.root}>
         <Fab onClick={handleClick} color="primary" aria-label="add">
           <AddIcon />
         </Fab>
       </div>
-    </div>
+
   );
 }
 

@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +6,7 @@ import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 import { useState, useEffect } from "react";
-import api from "../apis/api";
+import api from "../../apis/api";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
