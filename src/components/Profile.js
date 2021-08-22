@@ -1,8 +1,8 @@
-import NavBar from "./GlobalCompoments/NavBar";
-import GlobalCard from "./GlobalCompoments/GlobalCard";
+import NavBar from "./GlobalComponents/NavBar";
+import GlobalCard from "./GlobalComponents/GlobalCard";
 import api from "../apis/api";
 
-import FloatingBTN from "../components/GlobalCompoments/FloatingBTN"
+import FloatingBTN from "./GlobalComponents/FloatingBTN"
 import { useState, useEffect } from "react";
 
 function Profile() {

@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 // import api from "../apis/api";
-import NavBar from "./NavBar";
-import FloatingBTN from "./FloatingBTN";
+import NavBar from "./GlobalComponents/NavBar";
+import FloatingBTN from "./GlobalComponents/FloatingBTN";
 
 function Home() {
   const storedUser = localStorage.getItem("loggedInUser");

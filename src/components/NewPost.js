@@ -8,14 +8,14 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import PublishIcon from "@material-ui/icons/Publish";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import UserTag from "./GlobalCompoments/UserTag";
+import UserTag from "./GlobalComponents/UserTag";
 import api from "../apis/api";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { green } from "@material-ui/core/colors";
 import clsx from "clsx";
-import GoogleLocation from "./GlobalCompoments/GoogleLocation";
-import NavBar from "./GlobalCompoments/NavBar";
+import GoogleLocation from "./GlobalComponents/GoogleLocation";
+import NavBar from "./GlobalComponents/NavBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {

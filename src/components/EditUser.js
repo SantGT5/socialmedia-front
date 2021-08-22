@@ -1,4 +1,4 @@
-import NavBar from "./GlobalCompoments/NavBar";
+import NavBar from "./GlobalComponents/NavBar";
 import { useState, useEffect } from "react";
 import api from "../apis/api";
 

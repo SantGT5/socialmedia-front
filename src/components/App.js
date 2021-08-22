@@ -9,7 +9,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PersonalInfo from "./PersonalInfo";
 import EditUser from "./EditUser";
-import Home from "./GlobalCompoments/Home";
+import Home from "./Home";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
 
