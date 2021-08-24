@@ -33,13 +33,16 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
 
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
+          <Avatar
+          src={loggedInUser.user.imgUserURL ? loggedInUser.user.imgUserURL : "/broken-image.jpg"}
+          />
         }
         action={
           <IconButton aria-label="settings">

@@ -7,6 +7,8 @@ function Home() {
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
 
+console.log("loggedInUser Home -> ", loggedInUser)
+
   return (
     <div>
       <NavBar />

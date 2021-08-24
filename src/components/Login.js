@@ -33,7 +33,6 @@ function Login(props) {
 
     try {
       const response = await api.post("/login", state);
-
       setError(null);
 
       // Atualizando o state do Context para que todos os componentes tenham acesso ao usuário logado

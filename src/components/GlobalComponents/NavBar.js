@@ -13,10 +13,16 @@ import { useHistory } from "react-router";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import LockIcon from "@material-ui/icons/Lock";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({ left: false });
   const history = useHistory();
+
+  const handleLogout = () => {
+    window.localStorage.clear();
+    history.push("/login");
+  };
 
   const arrList = [
     {
@@ -89,17 +95,14 @@ export default function TemporaryDrawer() {
             </ListItem>
           );
         })}
-      </List>
 
-      {/* <div>
-
-<List>
-      <ListItem button key="Log out" onClick={handleClickOpen}>
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary="Log out" />
-            </ListItem>
+        <ListItem button key="Log out" onClick={handleLogout}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Log out" />
+        </ListItem>
       </List>
-</div> */}
     </Box>
   );
 

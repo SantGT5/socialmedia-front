@@ -15,7 +15,8 @@ function ProtectedRoute(props) {
     <Route
       {...propsClone}
       render={(routeProps) => {
-        if (loggedInUser.user._id) {
+
+        if (loggedInUser.user._id || loggedInUser._id){
           return <Component {...routeProps} />;
         } else {
           return (

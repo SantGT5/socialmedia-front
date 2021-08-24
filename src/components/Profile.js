@@ -8,12 +8,15 @@ import { useState, useEffect } from "react";
 function Profile() {
   const [status, setStatus] = useState([]);
 
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
+
+  console.log("loggedInUser -> ", loggedInUser)
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const response = await api.get("/allpost");
-        console.log("response -> ", response);
+        const response = await api.get("/userpost");
         setStatus([ ...response.data ]);
       } catch (err) {
         console.log(err.response);
@@ -25,6 +28,11 @@ function Profile() {
   return (
     <div>
       <NavBar />
+      <div className="d-flex justify-content-center">
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
+          @{loggedInUser.user.profileName}
+        </span>
+      </div>
       <div className="allPost d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
           return (

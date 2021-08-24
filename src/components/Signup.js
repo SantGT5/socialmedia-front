@@ -44,7 +44,7 @@ function Signup(props) {
 
     uploadData.append("imgUser", file);
 
-    const response = await api.post("/upload", uploadData);
+    const response = await api.post("/uploaduser", uploadData);
 
     return response.data.url;
   }

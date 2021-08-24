@@ -1,5 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { authContext } from "../contexts/authContext";
 import api from "../apis/api";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -47,6 +48,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function EditUser(props) {
+  const { setLoggedInUser } = useContext(authContext);
   const classes = useStyles();
   const history = useHistory();
 
@@ -63,6 +65,9 @@ function EditUser(props) {
   const [error, setErro] = useState(null);
   const [mensage, setMensage] = React.useState(false);
   const [img, setImg] = useState({ file: null, imgUser: null });
+
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
 
   const handleImage = (event) => {
     if (event.target.files.length) {
@@ -99,8 +104,7 @@ function EditUser(props) {
       try {
         const response = await api.get("/profile");
 
-        delete response.data._id;
-
+// delete response.data._id
         setStatus({ ...response.data });
       } catch (err) {
         console.log(err);
@@ -130,8 +134,17 @@ function EditUser(props) {
 
       const response = await api.put(`/edite/${id}`, { ...status, imgUserURL });
 
-      setMensage(true);
+console.log("loggedInUser -> ", loggedInUser)
 
+// setLoggedInUser({ ...status, imgUserURL });
+
+
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify(  {token: loggedInUser.token, user : {...status, imgUserURL} } )
+        )
+
+      setMensage(true);
       setErro(null);
 
       setTimeout(() => {

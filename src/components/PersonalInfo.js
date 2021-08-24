@@ -36,10 +36,11 @@ function PersonalInfo() {
     async function fetchProfile() {
       try {
         const response = await api.get("/profile");
-
+        
+        delete response.data._id
         setProfile({ ...response.data });
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data);
       }
     }
     fetchProfile();
@@ -62,6 +63,7 @@ function PersonalInfo() {
   return (
     <div>
       <NavBar />
+
       <div className="container">
         <Avatar
           style={{ width: "6.5em", height: "6.5em" }}
