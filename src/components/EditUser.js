@@ -1,6 +1,5 @@
 import NavBar from "./GlobalComponents/NavBar";
-import { useState, useEffect, useContext } from "react";
-import { authContext } from "../contexts/authContext";
+import { useState, useEffect } from "react";
 import api from "../apis/api";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -48,7 +47,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function EditUser(props) {
-  const { setLoggedInUser } = useContext(authContext);
   const classes = useStyles();
   const history = useHistory();
 
@@ -133,11 +131,6 @@ function EditUser(props) {
       const imgUserURL = await handleFileUpload(img.imgUser);
 
       const response = await api.put(`/edite/${id}`, { ...status, imgUserURL });
-
-console.log("loggedInUser -> ", loggedInUser)
-
-// setLoggedInUser({ ...status, imgUserURL });
-
 
       localStorage.setItem(
         "loggedInUser",
