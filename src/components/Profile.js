@@ -5,7 +5,8 @@ import api from "../apis/api";
 import FloatingBTN from "./GlobalComponents/FloatingBTN"
 import { useState, useEffect } from "react";
 
-function Profile() {
+
+function Profile(props) {
   const [status, setStatus] = useState([]);
 
   const storedUser = localStorage.getItem("loggedInUser");
@@ -25,6 +26,21 @@ function Profile() {
     fetchProfile();
   }, []);
 
+  console.log(status)
+  
+
+// async function handleSubmit(event){
+//   event.preventDefault(props);
+// try{
+//   console.log("dentro do Submit -> ", params )
+//   // const response = api.post( `/likedpost/${  }` )
+
+// }catch( err ){
+//   console.log( err )
+//   }
+// }
+
+
   return (
     <div>
       <NavBar />
@@ -38,6 +54,7 @@ function Profile() {
           return (
             <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
               <GlobalCard
+                like={elem._id}
                 userProfileName={elem.userProfileName}
                 addLocation={elem.addLocation}
                 postImgURL={elem.postImgURL}

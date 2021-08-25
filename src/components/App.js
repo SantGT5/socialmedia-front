@@ -12,6 +12,7 @@ import EditUser from "./EditUser";
 import Home from "./Home";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
+import LikePost from "./GlobalComponents/LikePost";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/newpost" component={NewPost} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
+          <Route path="/likedpost/:id" component={LikePost} />
           <Redirect exact from="/login" to="/" />
         </AuthContextComponent>
       </Switch>      

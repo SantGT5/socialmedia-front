@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-
 const authContext = createContext({ user: {}, token: "" });
 
 function AuthContextComponent(props) {
@@ -19,7 +18,7 @@ function AuthContextComponent(props) {
     setLoggedInUser({ user: {}, token: "" });
     localStorage.removeItem("loggedInUser");
   }
-
+  
   console.log("VALOR ATUAL DO CONTEXT =>", loggedInUser);
 
   return (

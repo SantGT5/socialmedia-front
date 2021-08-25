@@ -10,6 +10,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import WcIcon from "@material-ui/icons/Wc";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import { isJwtExpired } from "jwt-check-expiration";
 
 import { useHistory } from "react-router";
 
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PersonalInfo() {
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
+  const id = loggedInUser.user._id;
+  const history = useHistory();
   const classes = useStyles();
 
   const [profile, setProfile] = useState({
@@ -36,21 +41,20 @@ function PersonalInfo() {
     async function fetchProfile() {
       try {
         const response = await api.get("/profile");
-        
-        delete response.data._id
+        delete response.data._id;
         setProfile({ ...response.data });
       } catch (err) {
-        console.log(err.response.data);
+
+        const expired = isJwtExpired(loggedInUser.token);
+        if (expired === true) {
+          window.localStorage.clear();
+          history.push("/login");
+        }
+        console.log(err.response);
       }
     }
     fetchProfile();
   }, []);
-
-  const storedUser = localStorage.getItem("loggedInUser");
-  const loggedInUser = JSON.parse(storedUser || '""');
-  const id = loggedInUser.user._id;
-
-  const history = useHistory();
 
   async function handleClick() {
     try {
@@ -67,7 +71,7 @@ function PersonalInfo() {
       <div className="container">
         <Avatar
           style={{ width: "6.5em", height: "6.5em" }}
-          src={ profile.imgUserURL ? profile.imgUserURL : "/broken-image.jpg" }
+          src={profile.imgUserURL ? profile.imgUserURL : "/broken-image.jpg"}
         />
 
         <div className={classes.margin}>
