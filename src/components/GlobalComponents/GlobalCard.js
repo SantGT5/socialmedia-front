@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -41,10 +42,17 @@ export default function RecipeReviewCard(props) {
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
 
-  console.log("heart -> ", heart);
+  // console.log("heart -> ", heart[0].like);
 
+// let liked = false
 
-
+// for(let i = 0; i < heart.length; i++){
+//   for(let y = 0; y < heart[i].like.length; y++){
+//     if(heart[i].like[y] === loggedInUser.user.profileName){
+//       liked = true
+//     }
+//   }
+// }
 
 
 
@@ -64,7 +72,7 @@ export default function RecipeReviewCard(props) {
 
 
 
-  
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -101,7 +109,7 @@ export default function RecipeReviewCard(props) {
       <CardActions disableSpacing>
         <Link to={`/likedpost/${props.like}`}>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            { props.likeResult === true ? <FavoriteIcon /> :  <FavoriteBorderIcon /> }
           </IconButton>
         </Link>
         <IconButton aria-label="share">

@@ -51,10 +51,17 @@ function Profile(props) {
       </div>
       <div className="allPost d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
+
+for(let y = 0; y <= elem.like.length; y++){
+  
+  console.log("elem.like[y] test -> ", elem.like)
+// if(elem.like[y] === loggedInUser.user.profileName){
+  
           return (
             <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
               <GlobalCard
                 like={elem._id}
+                likeResult={ elem.like[y] === loggedInUser.user.profileName ? true : false }
                 userProfileName={elem.userProfileName}
                 addLocation={elem.addLocation}
                 postImgURL={elem.postImgURL}
@@ -62,7 +69,27 @@ function Profile(props) {
                 tagUser={elem.tagUser}
               />
             </div>
-          );
+          )
+          
+//           else{
+
+
+//             return (
+//               <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
+//                 <GlobalCard
+//                   like={elem._id}
+//                   likeResult={ false }
+//                   userProfileName={elem.userProfileName}
+//                   addLocation={elem.addLocation}
+//                   postImgURL={elem.postImgURL}
+//                   description={elem.description}
+//                   tagUser={elem.tagUser}
+//                 />
+//               </div>
+//             )
+// }
+        
+        }
         })}
       </div>
       <FloatingBTN />
