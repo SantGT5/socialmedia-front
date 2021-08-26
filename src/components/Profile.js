@@ -2,9 +2,8 @@ import NavBar from "./GlobalComponents/NavBar";
 import GlobalCard from "./GlobalComponents/GlobalCard";
 import api from "../apis/api";
 
-import FloatingBTN from "./GlobalComponents/FloatingBTN"
+import FloatingBTN from "./GlobalComponents/FloatingBTN";
 import { useState, useEffect } from "react";
-
 
 function Profile(props) {
   const [status, setStatus] = useState([]);
@@ -12,34 +11,19 @@ function Profile(props) {
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
 
-  console.log("loggedInUser -> ", loggedInUser)
+  console.log("loggedInUser -> ", loggedInUser);
 
   useEffect(() => {
     async function fetchProfile() {
       try {
         const response = await api.get("/userpost");
-        setStatus([ ...response.data ]);
+        setStatus([...response.data]);
       } catch (err) {
         console.log(err.response);
       }
     }
     fetchProfile();
   }, []);
-
-  console.log(status)
-  
-
-// async function handleSubmit(event){
-//   event.preventDefault(props);
-// try{
-//   console.log("dentro do Submit -> ", params )
-//   // const response = api.post( `/likedpost/${  }` )
-
-// }catch( err ){
-//   console.log( err )
-//   }
-// }
-
 
   return (
     <div>
@@ -51,45 +35,35 @@ function Profile(props) {
       </div>
       <div className="allPost d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
+          for (let y = 0; y <= elem.like.length; y++) {
+            // console.log("elem.like[y] test -> ", elem.like[0], elem.like[1], y, i, count)
 
-for(let y = 0; y <= elem.like.length; y++){
-  
-  console.log("elem.like[y] test -> ", elem.like)
-// if(elem.like[y] === loggedInUser.user.profileName){
-  
-          return (
-            <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
-              <GlobalCard
-                like={elem._id}
-                likeResult={ elem.like[y] === loggedInUser.user.profileName ? true : false }
-                userProfileName={elem.userProfileName}
-                addLocation={elem.addLocation}
-                postImgURL={elem.postImgURL}
-                description={elem.description}
-                tagUser={elem.tagUser}
-              />
-            </div>
-          )
-          
-//           else{
-
-
-//             return (
-//               <div key={i}  style={{ width:"100vw", maxWidth:"33em", marginBottom:"1em" }} className="p-2 bd-highlight">
-//                 <GlobalCard
-//                   like={elem._id}
-//                   likeResult={ false }
-//                   userProfileName={elem.userProfileName}
-//                   addLocation={elem.addLocation}
-//                   postImgURL={elem.postImgURL}
-//                   description={elem.description}
-//                   tagUser={elem.tagUser}
-//                 />
-//               </div>
-//             )
-// }
-        
-        }
+            return (
+              <div
+                key={i}
+                style={{
+                  width: "100vw",
+                  maxWidth: "33em",
+                  marginBottom: "1em",
+                }}
+                className="p-2 bd-highlight"
+              >
+                <GlobalCard
+                  like={elem._id}
+                  likeResult={
+                    elem.like[y] === loggedInUser.user.profileName
+                      ? true
+                      : false
+                  }
+                  userProfileName={elem.userProfileName}
+                  addLocation={elem.addLocation}
+                  postImgURL={elem.postImgURL}
+                  description={elem.description}
+                  tagUser={elem.tagUser}
+                />
+              </div>
+            );
+          }
         })}
       </div>
       <FloatingBTN />
