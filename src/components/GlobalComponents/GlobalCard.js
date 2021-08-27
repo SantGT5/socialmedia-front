@@ -9,7 +9,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
+// import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from "@material-ui/icons/Share";
@@ -19,6 +19,33 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../apis/api";
+
+
+
+
+
+
+
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+const options = [
+  'Delete',
+];
+
+const ITEM_HEIGHT = 48;
+
+
+
+
+
+
+
+
+
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,25 +62,31 @@ export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [heart, setHeart] = useState([]);
 
+
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+
+
+
+
+
+
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
-
-  // console.log("heart -> ", heart[0].like);
-
-// let liked = false
-
-// for(let i = 0; i < heart.length; i++){
-//   for(let y = 0; y < heart[i].like.length; y++){
-//     if(heart[i].like[y] === loggedInUser.user.profileName){
-//       liked = true
-//     }
-//   }
-// }
-
 
 
   useEffect(() => {
@@ -68,11 +101,6 @@ export default function RecipeReviewCard(props) {
     fetchLike();
   }, []);
 
-
-
-
-
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -85,11 +113,53 @@ export default function RecipeReviewCard(props) {
             }
           />
         }
-        action={
-          <IconButton aria-label="settings">
+
+
+
+
+
+
+        action={<div>
+          <IconButton 
+        aria-label="more"
+        id="long-button"
+        aria-controls="long-menu"
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+          >
             <MoreVertIcon />
           </IconButton>
+
+<Menu
+id="long-menu"
+anchorEl={anchorEl}
+keepMounted
+open={open}
+onClose={handleClose}
+PaperProps={{
+  style: {
+    maxHeight: ITEM_HEIGHT * 4.5,
+    width: '15ch',
+  },
+}}
+>
+{options.map((option) => (
+  <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+    {option}
+  </MenuItem>
+))}
+</Menu>
+</div>   
         }
+
+
+
+
+
+
+
+
         title={props.userProfileName}
         subheader={props.addLocation}
       />
