@@ -3,7 +3,6 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -19,19 +18,16 @@ function Home() {
   const classes = useStyles();
   const history = useHistory();
 
-
-  const handleClick = () =>{
+  const handleClick = () => {
     history.push("/newpost");
-  }
-
+  };
 
   return (
-      <div id="IconHome" className={classes.root}>
-        <Fab onClick={handleClick} color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </div>
-
+    <div id="IconHome" className={classes.root}>
+      <Fab onClick={handleClick} color="primary" aria-label="add">
+        <AddIcon />
+      </Fab>
+    </div>
   );
 }
 

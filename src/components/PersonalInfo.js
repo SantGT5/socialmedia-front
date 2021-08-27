@@ -1,5 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
 import api from "../apis/api";
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -11,9 +12,7 @@ import WcIcon from "@material-ui/icons/Wc";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import { isJwtExpired } from "jwt-check-expiration";
-
 import { useHistory } from "react-router";
-
 import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -147,6 +146,7 @@ function PersonalInfo() {
           Edit
         </Button>
       </div>
+      <FloatingBTN />
     </div>
   );
 }

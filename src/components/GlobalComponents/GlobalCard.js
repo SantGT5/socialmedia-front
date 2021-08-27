@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 // import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -20,32 +20,23 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../apis/api";
 
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
-
-
-
-
-
-
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-
-const options = [
-  'Delete',
-];
-
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { useHistory } from "react-router";
+const options = ["Delete"];
 const ITEM_HEIGHT = 48;
 
-
-
-
-
-
-
-
-
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -59,27 +50,32 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
   const [heart, setHeart] = useState([]);
-
-
-
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const openOption = Boolean(anchorEl);
+  const history = useHistory();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    setAnchorEl(false)
+  };
+
+  const handleCloseSlide = () => {
+    setOpen(false);
+  };
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-
-
-
-
-
-
+  const handleDelete = () => {
+    history.push(`/deletepost/${props.id}`);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -87,7 +83,6 @@ export default function RecipeReviewCard(props) {
 
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
-
 
   useEffect(() => {
     async function fetchLike() {
@@ -113,53 +108,44 @@ export default function RecipeReviewCard(props) {
             }
           />
         }
+        action={
+          <div>
+            <IconButton
+              aria-label="more"
+              id="long-button"
+              aria-controls="long-menu"
+              aria-expanded={openOption ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
 
-
-
-
-
-
-        action={<div>
-          <IconButton 
-        aria-label="more"
-        id="long-button"
-        aria-controls="long-menu"
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
-
-<Menu
-id="long-menu"
-anchorEl={anchorEl}
-keepMounted
-open={open}
-onClose={handleClose}
-PaperProps={{
-  style: {
-    maxHeight: ITEM_HEIGHT * 4.5,
-    width: '15ch',
-  },
-}}
->
-{options.map((option) => (
-  <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-    {option}
-  </MenuItem>
-))}
-</Menu>
-</div>   
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={openOption}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5,
+                  width: "15ch",
+                },
+              }}
+            >
+              {options.map((option, i) => (
+                <MenuItem
+                  key={i}
+                  selected={option === "Pyxis"}
+                  onClick={handleClickOpen}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
+          </div>
         }
-
-
-
-
-
-
-
-
         title={props.userProfileName}
         subheader={props.addLocation}
       />
@@ -179,7 +165,11 @@ PaperProps={{
       <CardActions disableSpacing>
         <Link to={`/likedpost/${props.like}`}>
           <IconButton aria-label="add to favorites">
-            { props.likeResult === true ? <FavoriteIcon /> :  <FavoriteBorderIcon /> }
+            {props.likeResult === true ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
           </IconButton>
         </Link>
         <IconButton aria-label="share">
@@ -204,6 +194,35 @@ PaperProps={{
           <Typography paragraph>{props.tagUser}</Typography>
         </CardContent>
       </Collapse>
+
+      <div>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {"Are you Sure?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Do you really want to delete this post ?
+              This process cannot be undone.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseSlide} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleDelete} color="primary">
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Card>
   );
 }

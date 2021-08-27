@@ -13,6 +13,8 @@ import Home from "./Home";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
 import LikePost from "./GlobalComponents/LikePost";
+import DeletePost from "./GlobalComponents/DeletePost";
+import SearchUser from "./SearchUser";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/likedpost/:id" component={LikePost} />
+          <Route path="/search" component={SearchUser} />
+          <Route path="/deletepost/:id" component={DeletePost} />
           <Redirect exact from="/login" to="/" />
         </AuthContextComponent>
       </Switch>      
