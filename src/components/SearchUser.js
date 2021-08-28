@@ -6,26 +6,24 @@ import api from "../apis/api";
 import { useEffect, useState } from "react";
 
 function SearchUser() {
-  const [ user, setUser ] = useState({});
-const [ found, setFound ] = useState([]);
-  console.log("user Search -> ", user);
+  const [ user, setUser ] = useState({userName: "",});
+  const [ found, setFound ] = useState([]);
   console.log("found Search -> ", found);
 
 
 const handleChange = (event) => {
-    setUser({ [event.currentTarget.name]: event.currentTarget.value })
+    setUser({ ...user, [event.currentTarget.name]: event.currentTarget.value })
 }
 
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        console.log("user dentro do submite -> ", user)
-        const response = await api.get("/search", user);
+        console.log("user-> ", user)
+        const response = await api.post("/search", {userName: user.userName});
 
-        console.log("response dentro do submite -> ", response);
+        setFound([ ...response.data ]);
 
-        // setFound({ ...response.data });
       } catch (err) {
         console.log(err.response);
       }
@@ -53,8 +51,17 @@ const handleChange = (event) => {
           label="Outlined"
           variant="outlined"
           name="userName"
+          type="text"
         />
       </Box>
+
+<div>
+
+  { found.map(( elem ) =>{
+    return <ul><li>{elem.profileName}</li></ul>
+  }) }
+</div>
+
     </div>
   );
 }

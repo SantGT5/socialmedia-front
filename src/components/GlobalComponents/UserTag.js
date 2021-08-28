@@ -51,8 +51,6 @@ export default function CheckboxesTags(props) {
       onChange={props.onChange}
       style={{ width: 300 }}
       renderInput={(params, i) => (
-        //   console.log( params.InputProps.startAdornment[0].props.label ),
-        //   {params.InputProps.startAdornment[i].props.label},
         <TextField {...params} label="@TagSomeone" placeholder="@Tags" />
       )}
     />
