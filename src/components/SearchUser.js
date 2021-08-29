@@ -1,9 +1,10 @@
 import NavBar from "./GlobalComponents/NavBar";
-import Box from "@material-ui/core/Box";
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
 import TextField from "@material-ui/core/TextField";
 import api from "../apis/api";
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Avatar from "@material-ui/core/Avatar";
 
@@ -62,7 +63,7 @@ function SearchUser() {
             ) : (
               found.map((elem) => {
                 return (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Link to={ `/userprofile/${elem.profileName}` } style={{ display: "flex", justifyContent: "center", textDecoration:"none", color:"black" }}>
                     <div
                       className="borderSearch"
                       style={{
@@ -93,13 +94,14 @@ function SearchUser() {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })
             )}
           </div>
         </div>
       </div>
+      <FloatingBTN />
     </div>
   );
 }
