@@ -31,7 +31,13 @@ import Slide from "@material-ui/core/Slide";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router";
+import FacebookIcon from "@material-ui/icons/Facebook";
+
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 const options = ["Delete"];
+
 const ITEM_HEIGHT = 48;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -50,22 +56,45 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard(props) {
+  const history = useHistory();
+
+  const arrShare = [
+    {
+      text: "Facebook",
+      icon: <FacebookIcon />,
+      href: `http://www.facebook.com/sharer.php?u=${props.share}`,
+    },
+  ];
+
+  const [share, setShare] = React.useState(null);
+  const openShare = Boolean(setShare);
+
+  console.log("share -> ", share);
+
+  const handleClickShare = (event) => {
+    setShare(event.currentTarget);
+  };
+  const handleCloseShare = () => {
+    setShare(null);
+  };
+
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
+
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [heart, setHeart] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const openOption = Boolean(anchorEl);
-  const history = useHistory();
 
   const handleClickOpen = () => {
     setOpen(true);
-    setAnchorEl(false)
+    setAnchorEl(false);
   };
 
   const handleCloseSlide = () => {
     setOpen(false);
   };
-
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,9 +109,6 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  const storedUser = localStorage.getItem("loggedInUser");
-  const loggedInUser = JSON.parse(storedUser || '""');
 
   useEffect(() => {
     async function fetchLike() {
@@ -110,16 +136,20 @@ export default function RecipeReviewCard(props) {
         }
         action={
           <div>
-            <IconButton
-              aria-label="more"
-              id="long-button"
-              aria-controls="long-menu"
-              aria-expanded={openOption ? "true" : undefined}
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreVertIcon />
-            </IconButton>
+            {props.loggedInUser === loggedInUser.user.profileName ? (
+              <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls="long-menu"
+                aria-expanded={openOption ? "true" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <MoreVertIcon />
+              </IconButton>
+            ) : (
+              <></>
+            )}
 
             <Menu
               id="long-menu"
@@ -172,9 +202,71 @@ export default function RecipeReviewCard(props) {
             )}
           </IconButton>
         </Link>
-        <IconButton aria-label="share">
+
+        {/* <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
+
+        <div>
+          <IconButton
+            aria-label="more"
+            id="long-button"
+            aria-controls="long-menu"
+            aria-expanded={openShare ? "true" : undefined}
+            aria-haspopup="true"
+            onClick={handleClickShare}
+          >
+            <ShareIcon />
+          </IconButton>
+          <Menu
+            id="long-menu"
+            MenuListProps={{
+              "aria-labelledby": "long-button",
+            }}
+            anchorEl={share}
+            open={share}
+            onClose={handleCloseShare}
+            PaperProps={{
+              style: {
+                maxHeight: ITEM_HEIGHT * 4.5,
+                width: "15ch",
+              },
+            }}
+          >
+            <MenuItem style={{ padding: "0px" }} onClick={handleCloseShare}>
+              {arrShare.map((option, i) => {
+                const { text, icon, href } = option;
+
+                return (
+                  <a
+                    button
+                    key={i}
+                    style={{
+                      padding: "0px",
+                      marginLeft: "12px",
+                      display: "flex",
+                      alignItems: "center",
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                    button
+                    key={i}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {icon}
+                    <ListItemText
+                      style={{ marginLeft: "10px" }}
+                      primary={text}
+                    />
+                  </a>
+                );
+              })}
+            </MenuItem>
+          </Menu>
+        </div>
+
         <div className="d-flex justify-content-sm-end">
           <span>Tag</span>
         </div>
@@ -209,8 +301,8 @@ export default function RecipeReviewCard(props) {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Do you really want to delete this post ?
-              This process cannot be undone.
+              Do you really want to delete this post ? This process cannot be
+              undone.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

@@ -3,10 +3,10 @@ import api from "../apis/api";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 
-import GlobalCard from "../components/GlobalComponents/GlobalCard"
+import GlobalCard from "../components/GlobalComponents/GlobalCard";
 
 function UserProfile() {
-const storedUser = localStorage.getItem("loggedInUser");
+  const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
   const { profileName } = useParams();
   const [userprofile, setUserProfile] = useState([]);
@@ -29,6 +29,11 @@ const storedUser = localStorage.getItem("loggedInUser");
   return (
     <div>
       <NavBar />
+      <div className="d-flex justify-content-center">
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
+          {userprofile[0] ? "@" + userprofile[0].userProfileName : null}
+        </span>
+      </div>
       <div className="allPost d-flex flex-column-reverse bd-highlight">
         {userprofile.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
@@ -51,12 +56,16 @@ const storedUser = localStorage.getItem("loggedInUser");
                       ? true
                       : false
                   }
-                  id={ elem._id }
+                  loggedInUser={elem.userProfileName}
+                  id={elem._id}
+                  share={elem.postImgURL}
                   userProfileName={elem.userProfileName}
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}
                   description={elem.description}
-                  tagUser={<span>{elem.tagUser ? elem.tagUser + "" : null }</span>}
+                  tagUser={
+                    <span>{elem.tagUser ? elem.tagUser + "" : null}</span>
+                  }
                 />
               </div>
             );

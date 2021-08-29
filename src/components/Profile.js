@@ -55,12 +55,16 @@ function Profile(props) {
                       ? true
                       : false
                   }
-                  id={ elem._id }
+                  id={elem._id}
+                  share={elem.postImgURL}
                   userProfileName={elem.userProfileName}
+                  loggedInUser={elem.userProfileName}
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}
                   description={elem.description}
-                  tagUser={<span>{elem.tagUser ? elem.tagUser + "" : null }</span>}
+                  tagUser={
+                    <span>{elem.tagUser ? elem.tagUser + "" : null}</span>
+                  }
                 />
               </div>
             );
