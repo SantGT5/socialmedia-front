@@ -31,11 +31,16 @@ import Slide from "@material-ui/core/Slide";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router";
+
+import RedditIcon from "@material-ui/icons/Reddit";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import PinterestIcon from "@material-ui/icons/Pinterest";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
 
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 const options = ["Delete"];
 
 const ITEM_HEIGHT = 48;
@@ -63,6 +68,26 @@ export default function RecipeReviewCard(props) {
       text: "Facebook",
       icon: <FacebookIcon />,
       href: `http://www.facebook.com/sharer.php?u=${props.share}`,
+    },
+    {
+      text: "LinkedIn",
+      icon: <LinkedInIcon />,
+      href: `https://www.linkedin.com/shareArticle?mini=true&url=${props.share}`,
+    },
+    {
+      text: "Pinterest",
+      icon: <PinterestIcon />,
+      href: `https://www.pinterest.es/pin/create/button/?url=${props.share}`,
+    },
+    {
+      text: "WhatsApp",
+      icon: <WhatsAppIcon />,
+      href: `whatsapp://send?text=${props.share}`,
+    },
+    {
+      text: "Reddit",
+      icon: <RedditIcon />,
+      href: `http://www.reddit.com/submit?url=${props.share}`,
     },
   ];
 
@@ -202,11 +227,6 @@ export default function RecipeReviewCard(props) {
             )}
           </IconButton>
         </Link>
-
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
-
         <div>
           <IconButton
             aria-label="more"
@@ -234,44 +254,42 @@ export default function RecipeReviewCard(props) {
             }}
           >
             <MenuItem style={{ padding: "0px" }} onClick={handleCloseShare}>
-              {arrShare.map((option, i) => {
-                const { text, icon, href } = option;
+              <List style={{ padding: "0px" }}>
+                {arrShare.map((option, i) => {
+                  const { text, icon, href } = option;
 
-                return (
-                  <a
-                    button
-                    key={i}
-                    style={{
-                      padding: "0px",
-                      marginLeft: "12px",
-                      display: "flex",
-                      alignItems: "center",
-                      textDecoration: "none",
-                      color: "black",
-                    }}
-                    button
-                    key={i}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    <ListItemText
-                      style={{ marginLeft: "10px" }}
-                      primary={text}
-                    />
-                  </a>
-                );
-              })}
+                  return (
+                    <ListItem style={{ padding: "2px" }}>
+                      <a
+                        button
+                        key={i}
+                        style={{
+                          padding: "0px",
+                          marginLeft: "12px",
+                          display: "flex",
+                          alignItems: "center",
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                        button
+                        key={i}
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {icon}
+                        <ListItemText
+                          style={{ marginLeft: "10px" }}
+                          primary={text}
+                        />
+                      </a>
+                    </ListItem>
+                  );
+                })}
+              </List>
             </MenuItem>
           </Menu>
         </div>
-
-        <div className="d-flex justify-content-sm-end">
-          <span>Tag</span>
-        </div>
-
-        {/* style={{ marginLeft:"13.9em", width:"5.1em" }} */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
