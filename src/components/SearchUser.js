@@ -5,25 +5,9 @@ import api from "../apis/api";
 
 import { useEffect, useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import { deepOrange } from "@material-ui/core/colors";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
-  },
-}));
 
 function SearchUser() {
-  const classes = useStyles();
   const [user, setUser] = useState({ userName: "" });
   const [found, setFound] = useState([]);
   console.log("found Search -> ", found);
@@ -49,11 +33,19 @@ function SearchUser() {
 
   return (
     <div>
-      <div style={{ display: "flex" }}>
+      <div>
         <NavBar />
-        <div style={{ display: "flex", marginBottom: "2em" }}>
+      </div>
+      <div style={{ marginLeft: "2em", marginRight: "2em" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "1em",
+          }}
+        >
           <TextField
-            style={{ marginTop: "2em", maxWidth: "100vw" }}
+            style={{ marginTop: "2em", width: "100vw", maxWidth: "90vw" }}
             value={user.userName}
             onChange={handleChange}
             id="outlined-basic"
@@ -63,38 +55,49 @@ function SearchUser() {
             type="text"
           />
         </div>
-      </div>
-      <div>
-        <div style={{ flexDirection: "column" }}>
-          {user.userName === "" ? (
-            <></>
-          ) : (
-            found.map((elem) => {
-              return (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginTop: "0.5em",
-                    marginLeft: "1em",
-                  }}
-                >
-                  <Avatar
-                    src={
-                      elem.imgUserURL ? elem.imgUserURL : "/broken-image.jpg"
-                    }
-                  />
-                  <div className="d-flex flex-column bd-highlight mb-3">
-                    <span style={{ padding: "0px" }}>{elem.profileName}</span>
+        <div>
+          <div style={{ flexDirection: "column" }}>
+            {user.userName === "" ? (
+              <></>
+            ) : (
+              found.map((elem) => {
+                return (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <div
+                      className="borderSearch"
+                      style={{
+                        width: "20em",
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: "0.5em",
+                      }}
+                    >
+                      <Avatar
+                        src={
+                          elem.imgUserURL
+                            ? elem.imgUserURL
+                            : "/broken-image.jpg"
+                        }
+                        style={{ marginLeft:"6px" }}
+                      />
+                      <div
+                        style={{ marginTop: "9px" }}
+                        className="d-flex flex-column bd-highlight mb-3"
+                      >
+                        <span style={{ padding: "0px" }}>
+                          {elem.profileName}
+                        </span>
 
-                    <span style={{ padding: "0px", fontSize: "13px" }}>
-                      {elem.name}
-                    </span>
+                        <span style={{ padding: "0px", fontSize: "13px" }}>
+                          {elem.name}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          )}
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
     </div>
