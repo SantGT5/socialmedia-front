@@ -150,15 +150,7 @@ export default function RecipeReviewCard(props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        avatar={
-          <Avatar
-            src={
-              loggedInUser.user.imgUserURL
-                ? loggedInUser.user.imgUserURL
-                : "/broken-image.jpg"
-            }
-          />
-        }
+        avatar={<Avatar src={props.imgUser ? props.imgUser : ""} />}
         action={
           <div>
             {props.loggedInUser === loggedInUser.user.profileName ? (

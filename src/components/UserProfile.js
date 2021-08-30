@@ -59,6 +59,7 @@ function UserProfile() {
                   loggedInUser={elem.userProfileName}
                   id={elem._id}
                   share={elem.postImgURL}
+                  imgUser={elem.imgUser}
                   userProfileName={elem.userProfileName}
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}

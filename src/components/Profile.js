@@ -57,6 +57,7 @@ function Profile(props) {
                   }
                   id={elem._id}
                   share={elem.postImgURL}
+                  imgUser={elem.imgUser}
                   userProfileName={elem.userProfileName}
                   loggedInUser={elem.userProfileName}
                   addLocation={elem.addLocation}
