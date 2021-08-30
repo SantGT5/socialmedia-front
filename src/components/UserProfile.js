@@ -27,7 +27,7 @@ function UserProfile() {
   }, []);
 
   return (
-    <div>
+    <div style={{ marginBottom:"4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
         <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>

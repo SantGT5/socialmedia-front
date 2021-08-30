@@ -1,35 +1,37 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import api from "../apis/api";
 import NavBar from "./GlobalComponents/NavBar";
 import FloatingBTN from "./GlobalComponents/FloatingBTN";
-import GlobalCard from "../components/GlobalComponents/GlobalCard"
+import GlobalCard from "../components/GlobalComponents/GlobalCard";
+import { isJwtExpired } from "jwt-check-expiration";
 
 function Home() {
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
+  const [allpost, setAllPost] = useState([]);
+  const history = useHistory();
 
-const [ allpost, setAllPost ] = useState([])
+  useEffect(() => {
+    async function fetchAllPost() {
+      try {
+        const response = await api.post("allpost");
 
-console.log("Home Post test -> ", allpost)
-
-useEffect(() => {
-  async function fetchAllPost(){
-try{
-
-const response = await api.post( "allpost" )
-
-setAllPost([ ...response.data ])
-
-}catch( err ){
-  console.log( err.respone )
-}
-  }
-  fetchAllPost()
-}, [])
-
+        setAllPost([...response.data]);
+      } catch (err) {
+        console.log(err.respone);
+        const expired = isJwtExpired(loggedInUser.token);
+        if (expired === true) {
+          window.localStorage.clear();
+          history.push("/login");
+        }
+      }
+    }
+    fetchAllPost();
+  }, []);
 
   return (
-    <div>
+    <div style={{ marginBottom:"4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
         <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
