@@ -1,5 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
 import GlobalCard from "./GlobalComponents/GlobalCard";
+import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
 import api from "../apis/api";
 
 import FloatingBTN from "./GlobalComponents/FloatingBTN";
@@ -33,7 +34,7 @@ function Profile(props) {
           @{loggedInUser.user.profileName}
         </span>
       </div>
-      <div className="allPost d-flex flex-column-reverse bd-highlight">
+      <div className="d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
             // console.log("elem.like[y] test -> ", elem.like[0], elem.like[1], y, i, count)
@@ -42,24 +43,25 @@ function Profile(props) {
               <div
                 key={i}
                 style={{
-                  width: "100vw",
-                  maxWidth: "33em",
+                  display:"flex",
+                  justifyContent:"center",
                   marginBottom: "1em",
                 }}
-                className="p-2 bd-highlight"
+                
               >
-                <GlobalCard
+                <NewGlobalCard
                   like={elem._id}
+                  className="p-2 bd-highlight"
                   likeResult={
                     elem.like[y] === loggedInUser.user.profileName
                       ? true
                       : false
                   }
-                  id={elem._id}
-                  share={elem.postImgURL}
-                  imgUser={elem.imgUser}
-                  userProfileName={elem.userProfileName}
                   loggedInUser={elem.userProfileName}
+                  id={elem._id}
+                  imgUser={elem.imgUser}
+                  share={elem.postImgURL}
+                  userProfileName={elem.userProfileName}
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}
                   description={elem.description}

@@ -39,8 +39,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
 const options = ["Delete"];
 const ITEM_HEIGHT = 48;
 
@@ -134,6 +132,7 @@ function NewGlobalCard(props) {
         height: "auto",
         maxWidth: "40em",
         borderRadius: "20px",
+        backgroundColor:"#f9f7f7"
       }}
     >
       <div className="post_header">
@@ -194,18 +193,19 @@ function NewGlobalCard(props) {
       >
         <img src={props.postImgURL} alt="Post image" />
       </div>
-      <div className="post_footer">
-        <div className="d-flex">
-          <Link to={`/likedpost/${props.like}`}>
-            <IconButton aria-label="add to favorites">
-              {props.likeResult === true ? (
-                <FavoriteIcon style={{ color: "red", fontSize: "1.4em" }} />
-              ) : (
-                <FavoriteBorderIcon style={{ fontSize: "1.4em" }} />
-              )}
-            </IconButton>
-          </Link>
-
+      <span>{ props.description }</span>
+      <div style={{ display: "flex" }}>
+        <div className="post_footer">
+          <div className="d-flex">
+            <Link to={`/likedpost/${props.like}`}>
+              <IconButton aria-label="add to favorites">
+                {props.likeResult === true ? (
+                  <FavoriteIcon style={{ color: "red", fontSize: "1.4em" }} />
+                ) : (
+                  <FavoriteBorderIcon style={{ fontSize: "1.4em" }} />
+                )}
+              </IconButton>
+            </Link>
 
             <IconButton
               aria-label="more"
@@ -268,14 +268,7 @@ function NewGlobalCard(props) {
                 </List>
               </MenuItem>
             </Menu>
-
-
-
-
-
-
-
-
+          </div>
         </div>
 
         <ExpandMore
@@ -284,17 +277,25 @@ function NewGlobalCard(props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon style={{ fontSize: "1.4em" }}/>
+          <ExpandMoreIcon style={{ fontSize: "1.4em" }} />
         </ExpandMore>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent style={{ padding:"0em" }}>
-          <Typography style={{ margin:"0em", marginTop:"0.5em", alignItems:"flex-start" }} paragraph>{props.tagUser}</Typography>
-        </CardContent>
-      </Collapse>
       </div>
-
-
-
+      <div>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent style={{ padding: "0em" }}>
+            <Typography
+              style={{
+                margin: "0em",
+                marginTop: "0.5em",
+                alignItems: "flex-start",
+              }}
+              paragraph
+            >
+              {props.tagUser}
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </div>
       <div>
         <Dialog
           open={open}
