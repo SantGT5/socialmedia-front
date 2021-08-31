@@ -113,10 +113,6 @@
 }
 
 
-.allPost{
-  align-items: center;
-}
-
 .borderSearch{
   border-radius: 10px;
   box-shadow: 1px 2px 5px grey;
@@ -129,3 +125,78 @@
   box-shadow: inset 0 0 0.5em rgb(155, 152, 152);
   background: rgb(255, 255, 255);
 }
+
+
+
+/* new Global Card */
+
+/* @import url('https://fonts.googleapis.com/css2?family=poppins&display=swap'); */
+
+.card{
+  padding: 1em;
+  border-radius: 0 0 20px rgba(0, 0, 0, 0.089);
+  box-shadow: 0px 3px 10px 2px rgb(0,0,0,0.397);
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+.post_header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4em;
+  position: relative;
+}
+
+.post_header #delete{
+  position: absolute;
+  right: 0;
+}
+
+.heading{
+  margin-left: 0.4em;
+}
+
+.heading .main_heading{
+  font-family: 0.6em;
+  margin:0;
+}
+
+.heading .sub_heading{
+  font-size: 0.8em;
+  margin:0;
+  color: rgb(0,0,0,0.836);
+}
+
+.post_header img{
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgb(0,0,0,0.432);
+  vertical-align: middle;
+}
+
+.post_img img{
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 0.5em;
+  box-shadow: 0px 18px 25px rgb(0,0,0,0.397);
+}
+
+.post_footer{
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+/* .btn{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+} */
+

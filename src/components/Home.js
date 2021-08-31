@@ -6,6 +6,12 @@ import FloatingBTN from "./GlobalComponents/FloatingBTN";
 import GlobalCard from "../components/GlobalComponents/GlobalCard";
 import { isJwtExpired } from "jwt-check-expiration";
 
+
+import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
+
+
+
+
 function Home() {
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
@@ -39,7 +45,7 @@ function Home() {
         </span>
       </div>
 
-      <div className="allPost d-flex flex-column-reverse bd-highlight">
+      <div className="d-flex flex-column-reverse bd-highlight">
         {allpost.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
             // console.log("elem.like[y] test -> ", elem.like[0], elem.like[1], y, i, count)
@@ -48,14 +54,15 @@ function Home() {
               <div
                 key={i}
                 style={{
-                  width: "100vw",
-                  maxWidth: "33em",
+                  display:"flex",
+                  justifyContent:"center",
                   marginBottom: "1em",
                 }}
-                className="p-2 bd-highlight"
+                
               >
-                <GlobalCard
+                <NewGlobalCard
                   like={elem._id}
+                  className="p-2 bd-highlight"
                   likeResult={
                     elem.like[y] === loggedInUser.user.profileName
                       ? true
