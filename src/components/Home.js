@@ -3,14 +3,9 @@ import { useHistory } from "react-router";
 import api from "../apis/api";
 import NavBar from "./GlobalComponents/NavBar";
 import FloatingBTN from "./GlobalComponents/FloatingBTN";
-import GlobalCard from "../components/GlobalComponents/GlobalCard";
 import { isJwtExpired } from "jwt-check-expiration";
 
-
 import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
-
-
-
 
 function Home() {
   const storedUser = localStorage.getItem("loggedInUser");
@@ -37,11 +32,11 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ marginBottom:"4em" }}>
+    <div style={{ marginBottom: "4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
-          @{loggedInUser.user.profileName}
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"2em" }}>
+        <i class="far fa-compass"></i>Explore
         </span>
       </div>
 
@@ -54,11 +49,10 @@ function Home() {
               <div
                 key={i}
                 style={{
-                  display:"flex",
-                  justifyContent:"center",
-                  marginBottom: "1em",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "1.5em",
                 }}
-                
               >
                 <NewGlobalCard
                   like={elem._id}

@@ -2,8 +2,8 @@ import NavBar from "../components/GlobalComponents/NavBar";
 import api from "../apis/api";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
 
-import GlobalCard from "../components/GlobalComponents/GlobalCard";
 import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
 
 function UserProfile() {
@@ -11,8 +11,6 @@ function UserProfile() {
   const loggedInUser = JSON.parse(storedUser || '""');
   const { profileName } = useParams();
   const [userprofile, setUserProfile] = useState([]);
-
-  console.log("userprofile -> ", userprofile);
 
   useEffect(() => {
     async function fetchProfileUser() {
@@ -28,10 +26,10 @@ function UserProfile() {
   }, []);
 
   return (
-    <div style={{ marginBottom:"4em" }}>
+    <div style={{ marginBottom: "4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"2em" }}>
           {userprofile[0] ? "@" + userprofile[0].userProfileName : null}
         </span>
       </div>
@@ -44,11 +42,10 @@ function UserProfile() {
               <div
                 key={i}
                 style={{
-                  display:"flex",
-                  justifyContent:"center",
-                  marginBottom: "1em",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "1.5em",
                 }}
-                
               >
                 <NewGlobalCard
                   like={elem._id}
@@ -75,6 +72,7 @@ function UserProfile() {
           }
         })}
       </div>
+      <FloatingBTN />
     </div>
   );
 }

@@ -132,7 +132,6 @@ function NewGlobalCard(props) {
         height: "auto",
         maxWidth: "40em",
         borderRadius: "20px",
-        backgroundColor: "#f9f7f7",
       }}
     >
       <div className="post_header">

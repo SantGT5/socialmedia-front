@@ -163,14 +163,14 @@ function NewPost() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <div>
         <NavBar />
       </div>
-
+<div style={{ display: "flex", justifyContent:"center" }}>
       <div
         style={{ marginBottom: "0.6em" }}
-        className="d-flex justify-content-center"
+        className="newPost flex-column bd-highlight mb-3"
       >
         {/* <GlobalCard
     image={ img.file ? img.file : userImg }
@@ -183,13 +183,13 @@ function NewPost() {
             alt="Your preview file selected"
           />
         ) : (
-          <img className="imgNull" src={userImg} alt="Preview file selected" />
+          <></>
         )}
-      </div>
+      
 
-      <div className="d-flex justify-content-center">
-        <div className="d-flex flex-column bd-highlight mb-3">
-          <div className="p-2 bd-highlight">
+
+
+
             <div className={classes.root}>
               <input
                 accept="image/*"
@@ -241,7 +241,7 @@ function NewPost() {
               noValidate
               autoComplete="off"
             >
-              <form className={classes.root} noValidate autoComplete="off">
+              <div className={classes.root} noValidate autoComplete="off">
                 <TextField
                   style={{ width: "18.7em", marginBottom: "1em" }}
                   id="outlined-multiline-static"
@@ -253,7 +253,7 @@ function NewPost() {
                   name="description"
                   value={des.description}
                 />
-              </form>
+              </div>
             </Box>
 
             <div className="p-2 bd-highlight" style={{ marginBottom: "1em" }}>
@@ -283,11 +283,14 @@ function NewPost() {
                     className={classes.buttonProgress}
                   />
                 )}
-              </div>
+
             </div>
-          </div>
-        </div>
+            </div>
+
       </div>
+      
+      </div>
+      
     </form>
   );
 }

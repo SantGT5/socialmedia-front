@@ -36,6 +36,11 @@ function SearchUser() {
     <div>
       <div>
         <NavBar />
+        <div className="d-flex justify-content-center">
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"0em" }}>
+        <i class="fas fa-user-plus"></i> Search Profiles
+        </span>
+      </div>
       </div>
       <div style={{ marginLeft: "2em", marginRight: "2em" }}>
         <div
@@ -46,7 +51,7 @@ function SearchUser() {
           }}
         >
           <TextField
-            style={{ marginTop: "2em", width: "100vw", maxWidth: "90vw" }}
+            style={{ marginTop: "2em", width: "100%", maxWidth: "90vw" }}
             value={user.userName}
             onChange={handleChange}
             id="outlined-basic"

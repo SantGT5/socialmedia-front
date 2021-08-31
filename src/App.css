@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+#root{
+  background-color: #ebebeb;
+}
+
+html{
+  background-color: #ebebeb;
+}
 
 .App-logo {
   height: 40vmin;
@@ -48,7 +55,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #f9f7f7;
   border: white;
   border-radius: 15px;
   box-shadow: 5px 10px 18px #888888;
@@ -79,7 +85,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #f9f7f7;
   border: white;
   border-radius: 15px;
   box-shadow: 5px 10px 18px #888888;
@@ -95,10 +100,10 @@
 }
 
 .imgNewPost {
-  min-height: 30em;
-  min-width: 22em;
   max-height: 30em;
   max-width: 22em;
+  width: 100%;
+  height: auto;
   object-fit: cover;
 }
 
@@ -178,7 +183,7 @@
   height: auto;
   border-radius: 20px;
   margin-bottom: 0.8em;
-  box-shadow: 0px 18px 25px rgb(0,0,0,0.397);
+  box-shadow: 0px 10px 20px rgb(0,0,0,0.397);
 }
 
 .post_footer{
@@ -199,3 +204,7 @@
   cursor: pointer;
 } */
 
+.newPost{
+  display: flex;
+  align-items: center;
+}

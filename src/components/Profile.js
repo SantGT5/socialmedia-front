@@ -30,7 +30,7 @@ function Profile(props) {
     <div style={{ marginBottom:"4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em" }}>
+        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"2em" }}>
           @{loggedInUser.user.profileName}
         </span>
       </div>
@@ -45,7 +45,7 @@ function Profile(props) {
                 style={{
                   display:"flex",
                   justifyContent:"center",
-                  marginBottom: "1em",
+                  marginBottom: "1.5em",
                 }}
                 
               >

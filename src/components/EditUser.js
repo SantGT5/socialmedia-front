@@ -225,7 +225,7 @@ function EditUser(props) {
             <div>
               <select
                 className="container form-select"
-                style={{ marginTop: "2em", width: "10em" }}
+                style={{ marginTop: "2em", width: "10em", backgroundColor:"#ebebeb" }}
                 aria-label="Default select example"
                 value={status.gender}
                 onChange={handleChange}
