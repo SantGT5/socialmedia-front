@@ -68,7 +68,7 @@ function NewPost() {
   });
 
   const handleButtonClick = () => {
-    if ((error === null && success === false) || error) {
+    if (error === null && success === false) {
       setSuccess(false);
       setLoading(true);
 
@@ -78,9 +78,18 @@ function NewPost() {
       }, 1000);
     }
 
-    if (!error && success === true) {
-      setSuccess(true);
-      setLoading(false);
+    if (error) {
+      setSuccess(false);
+      setLoading(true);
+
+      timer.current = window.setTimeout(() => {
+        setSuccess(false);
+        setLoading(false);
+      }, 500);
+    }
+
+    if (img.postImg) {
+      setLoading(true);
     }
   };
 
@@ -135,8 +144,8 @@ function NewPost() {
         postImgURL,
       });
 
-      setError(null);
       setSuccess(true);
+      setError(null);
 
       setTimeout(() => {
         history.push("/profile");

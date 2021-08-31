@@ -23,9 +23,6 @@ function Signup(props) {
     gender: "",
   });
 
-  console.log("state -> ", state);
-  console.log("img -> ", img);
-
   async function handleImage(event) {
     if (event.target.files.length) {
       setImg({
@@ -40,13 +37,19 @@ function Signup(props) {
   }
 
   async function handleFileUpload(file) {
-    const uploadData = new FormData();
+    if(file){
 
-    uploadData.append("imgUser", file);
+      const uploadData = new FormData();
 
-    const response = await api.post("/uploaduser", uploadData);
+      uploadData.append("imgUser", file);
+  
+      const response = await api.post("/uploaduser", uploadData);
+  
+      return response.data.url;
+    }
 
-    return response.data.url;
+    return ""
+    
   }
 
   function handleChange(event) {
@@ -127,30 +130,30 @@ function Signup(props) {
 
             <select
               className="container form-select"
-              style={{ marginTop: "2em", width: "10em" }}
+              style={{ marginTop: "2em", width: "10em", backgroundColor:"#f9f7f7" }}
               aria-label="Default select example"
               value={state.gender}
               onChange={handleChange}
               name="gender"
             >
-              <option value="" defaultValue disabled hidden>
+              <option  value="" defaultValue disabled hidden>
                 Gender
               </option>
               {arrGender.map((text, i) => {
                 return (
-                  <option key={i} value={text}>
+                  <option   key={i} value={text}>
                     {text}
                   </option>
                 );
               })}
             </select>
 
-            <div style={{ marginTop: "10%" }}>
+            <div style={{ marginTop: "2em" }}>
               <Button variant="outlined" type="submit">
                 Next
               </Button>
             </div>
-            <div style={{ marginTop: "8%" }}>
+            <div style={{ marginTop: "1.5em", marginBottom:"1.2em" }}>
               <span>
                 Have an account?{" "}
                 <Link to="/login" className="links">

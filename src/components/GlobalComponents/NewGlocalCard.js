@@ -132,7 +132,7 @@ function NewGlobalCard(props) {
         height: "auto",
         maxWidth: "40em",
         borderRadius: "20px",
-        backgroundColor:"#f9f7f7"
+        backgroundColor: "#f9f7f7",
       }}
     >
       <div className="post_header">
@@ -193,7 +193,7 @@ function NewGlobalCard(props) {
       >
         <img src={props.postImgURL} alt="Post image" />
       </div>
-      <span>{ props.description }</span>
+      <span>{props.description}</span>
       <div style={{ display: "flex" }}>
         <div className="post_footer">
           <div className="d-flex">
