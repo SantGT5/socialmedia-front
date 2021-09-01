@@ -2,7 +2,7 @@ import NavBar from "../components/GlobalComponents/NavBar";
 import api from "../apis/api";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN";
 
 import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
 
@@ -29,14 +29,21 @@ function UserProfile() {
     <div style={{ marginBottom: "4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"2em" }}>
+        <span
+          style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom: "2em" }}
+        >
           {userprofile[0] ? "@" + userprofile[0].userProfileName : null}
         </span>
       </div>
       <div className="d-flex flex-column-reverse bd-highlight">
         {userprofile.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
-            // console.log("elem.like[y] test -> ", elem.like[0], elem.like[1], y, i, count)
+            let count = 0;
+            elem.like.forEach((item, index) => {
+              if (item === loggedInUser.user.profileName) {
+                count++;
+              }
+            });
 
             return (
               <div
@@ -50,11 +57,7 @@ function UserProfile() {
                 <NewGlobalCard
                   like={elem._id}
                   className="p-2 bd-highlight"
-                  likeResult={
-                    elem.like[y] === loggedInUser.user.profileName
-                      ? true
-                      : false
-                  }
+                  likeResult={count > 0 ? true : false}
                   loggedInUser={elem.userProfileName}
                   id={elem._id}
                   imgUser={elem.imgUser}

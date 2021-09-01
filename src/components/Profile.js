@@ -27,36 +27,40 @@ function Profile(props) {
   }, []);
 
   return (
-    <div style={{ marginBottom:"4em" }}>
+    <div style={{ marginBottom: "4em" }}>
       <NavBar />
       <div className="d-flex justify-content-center">
-        <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"2em" }}>
+        <span
+          style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom: "2em" }}
+        >
           @{loggedInUser.user.profileName}
         </span>
       </div>
       <div className="d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
-            // console.log("elem.like[y] test -> ", elem.like[0], elem.like[1], y, i, count)
+            console.log("elem.like -> ", elem.like);
+
+            let count = 0;
+            elem.like.forEach((item, index) => {
+              if (item === loggedInUser.user.profileName) {
+                count++;
+              }
+            });
 
             return (
               <div
                 key={i}
                 style={{
-                  display:"flex",
-                  justifyContent:"center",
+                  display: "flex",
+                  justifyContent: "center",
                   marginBottom: "1.5em",
                 }}
-                
               >
                 <NewGlobalCard
                   like={elem._id}
                   className="p-2 bd-highlight"
-                  likeResult={
-                    elem.like[y] === loggedInUser.user.profileName
-                      ? true
-                      : false
-                  }
+                  likeResult={count > 0 ? true : false}
                   loggedInUser={elem.userProfileName}
                   id={elem._id}
                   imgUser={elem.imgUser}
