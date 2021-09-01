@@ -1,6 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
 import api from "../apis/api";
-import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -43,7 +43,6 @@ function PersonalInfo() {
         delete response.data._id;
         setProfile({ ...response.data });
       } catch (err) {
-
         const expired = isJwtExpired(loggedInUser.token);
         if (expired === true) {
           window.localStorage.clear();
@@ -64,7 +63,7 @@ function PersonalInfo() {
   }
 
   return (
-    <div>
+    <div >
       <NavBar />
 
       <div className="container">

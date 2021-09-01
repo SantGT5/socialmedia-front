@@ -57,7 +57,6 @@ export default function TemporaryDrawer() {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
@@ -100,7 +99,7 @@ export default function TemporaryDrawer() {
       </List>
     </Box>
   );
-
+  
   return (
     <div>
       {["left"].map((anchor) => (
