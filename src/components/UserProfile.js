@@ -39,9 +39,16 @@ function UserProfile() {
         {userprofile.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
             let count = 0;
-            elem.like.forEach((item, index) => {
+            let countLikes = 0;
+            elem.like.forEach((item) => {
               if (item === loggedInUser.user.profileName) {
                 count++;
+              }
+            });
+
+            elem.like.forEach((likes) => {
+              if (likes) {
+                countLikes++;
               }
             });
 
@@ -66,8 +73,16 @@ function UserProfile() {
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}
                   description={elem.description}
+                  countLikes={countLikes}
                   tagUser={
-                    <span>{elem.tagUser ? elem.tagUser + "" : null}</span>
+                    elem.tagUser[0] ? (
+
+                        <span className="font">User tagged:
+                        {elem.tagUser.map((tag) => (
+                          <li>{tag}</li>
+                        ))}
+                        </span>
+                    ) : <></>
                   }
                 />
               </div>

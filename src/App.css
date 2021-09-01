@@ -3,6 +3,8 @@
 }
 #root{
   background-color: #ebebeb;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bolder;
 }
 
 html{
@@ -207,4 +209,10 @@ html{
 .newPost{
   display: flex;
   align-items: center;
+}
+
+
+.font{
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bolder;
 }

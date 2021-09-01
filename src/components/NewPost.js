@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import userImg from "../img/Sem Título.png";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import Box from "@material-ui/core/Box";

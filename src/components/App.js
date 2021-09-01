@@ -13,7 +13,6 @@ import NewPost from "./NewPost";
 import Profile from "./Profile";
 import LikePost from "./GlobalComponents/LikePost";
 import DeletePost from "./GlobalComponents/DeletePost";
-import SearchUser from "./SearchUser";
 import UserProfile from "./UserProfile";
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/likedpost/:id" component={LikePost} />
-          <Route path="/search" component={SearchUser} />
           <Route path="/userprofile/:profileName" component={UserProfile} />
           <Route path="/deletepost/:id" component={DeletePost} />
           <Redirect exact from="/login" to="/" />

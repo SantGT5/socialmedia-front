@@ -11,7 +11,6 @@ function DeletePost() {
       try {
         const response = await api.delete(`/deletepost/${params.id}`);
         history.goBack();
-        
       } catch (err) {
         console.log(err.response);
       }

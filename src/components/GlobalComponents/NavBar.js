@@ -10,10 +10,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import { useHistory } from "react-router";
-import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import LockIcon from "@material-ui/icons/Lock";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ExploreIcon from "@material-ui/icons/Explore";
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({ left: false });
@@ -26,14 +26,9 @@ export default function TemporaryDrawer() {
 
   const arrList = [
     {
-      text: "Home",
-      icon: <HomeIcon />,
+      text: "Explore",
+      icon: <ExploreIcon />,
       onClick: () => history.push("/"),
-    },
-    {
-      text: "Search",
-      icon: <SearchIcon />,
-      onClick: () => history.push("/search"),
     },
     {
       text: "Profile",
@@ -112,10 +107,10 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           <MenuIcon
             style={{
-              width: "2.8em",
-              height: "auto",
-              marginLeft: "1em",
-              marginTop: "1em",
+              width: "2.5em",
+              height: "2.5em",
+              marginLeft: "0.7em",
+              marginTop: "0.5em",
             }}
             onClick={toggleDrawer(anchor, true)}
           >

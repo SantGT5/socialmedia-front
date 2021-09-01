@@ -4,7 +4,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import * as React from "react";
 import { useHistory } from "react-router";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -35,12 +35,23 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { styled } from "@material-ui/core/styles";
 
+const options = ["Delete"];
+const ITEM_HEIGHT = 48;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const options = ["Delete"];
-const ITEM_HEIGHT = 48;
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 function NewGlobalCard(props) {
   const history = useHistory();
@@ -50,17 +61,6 @@ function NewGlobalCard(props) {
   const [open, setOpen] = useState(false);
   const [share, setShare] = React.useState(null);
   const openShare = Boolean(setShare);
-
-  const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
 
   const arrShare = [
     {
@@ -130,7 +130,7 @@ function NewGlobalCard(props) {
       style={{
         width: "95%",
         height: "auto",
-        maxWidth: "40em",
+        maxWidth: "30em",
         borderRadius: "20px",
       }}
     >
@@ -138,7 +138,7 @@ function NewGlobalCard(props) {
         <img
           style={{ width: "2.5em", height: "2.5em" }}
           src={props.imgUser}
-          alt="User image profile"
+          alt="User profile"
         />
         <div className="heading">
           <p className="main_heading">{props.userProfileName}</p>
@@ -190,7 +190,7 @@ function NewGlobalCard(props) {
         style={{ display: "flex", justifyContent: "center" }}
         className="post_img"
       >
-        <img src={props.postImgURL} alt="Post image" />
+        <img src={props.postImgURL} alt="Post" />
       </div>
       <span>{props.description}</span>
       <div style={{ display: "flex" }}>
@@ -237,10 +237,12 @@ function NewGlobalCard(props) {
                     const { text, icon, href } = option;
 
                     return (
-                      <ListItem style={{ padding: "2px" }}>
+                      <ListItem key={i} style={{ padding: "2px" }}>
                         <a
                           button
-                          key={i}
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
                           style={{
                             padding: "0px",
                             marginLeft: "12px",
@@ -249,11 +251,6 @@ function NewGlobalCard(props) {
                             textDecoration: "none",
                             color: "black",
                           }}
-                          button
-                          key={i}
-                          href={href}
-                          target="_blank"
-                          rel="noreferrer"
                         >
                           {icon}
                           <ListItemText
@@ -279,8 +276,10 @@ function NewGlobalCard(props) {
           <ExpandMoreIcon style={{ fontSize: "1.4em" }} />
         </ExpandMore>
       </div>
-      <div>
+      <div className="font">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <p>{props.countLikes} Likes</p>
+
           <CardContent style={{ padding: "0em" }}>
             <Typography
               style={{
@@ -295,34 +294,30 @@ function NewGlobalCard(props) {
           </CardContent>
         </Collapse>
       </div>
-      <div>
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">
-            {"Are you Sure?"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              Do you really want to delete this post ? This process cannot be
-              undone.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseSlide} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleDelete} color="primary">
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Are you Sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Do you really want to delete this post ? This process cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSlide} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="primary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

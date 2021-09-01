@@ -1,59 +1,46 @@
-import NavBar from "./GlobalComponents/NavBar";
-import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
 import TextField from "@material-ui/core/TextField";
-import api from "../apis/api";
 
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+function SearchUser(props) {
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     try {
 
-import Avatar from "@material-ui/core/Avatar";
+  //       const response = await api.post("/search", { userName: props.userName });
 
-function SearchUser() {
-  const [user, setUser] = useState({ userName: "" });
-  const [found, setFound] = useState([]);
-  console.log("found Search -> ", found);
-
-  const handleChange = (event) => {
-    setUser({ ...user, [event.currentTarget.name]: event.currentTarget.value });
-  };
-
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        console.log("user-> ", user);
-
-        const response = await api.post("/search", { userName: user.userName });
-
-        setFound([...response.data]);
-      } catch (err) {
-        console.log(err.response);
-      }
-    }
-    fetchUser();
-  }, [user.userName]);
+  //       setFound([...response.data]);
+  //     } catch (err) {
+  //       console.log(err.response);
+  //     }
+  //   }
+  //   fetchUser();
+  // }, [props.userName]);
 
   return (
     <div>
-      <div>
+      {/* <div>
         <NavBar />
         <div className="d-flex justify-content-center">
         <span style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom:"0em" }}>
-        <i class="fas fa-user-plus"></i> Search Profiles
+        <i className="fas fa-user-plus"></i> Search Profiles
         </span>
       </div>
-      </div>
-      <div style={{ marginLeft: "2em", marginRight: "2em" }}>
+      </div> */}
+      <div style={{ marginLeft: "0.7em" }}>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
             marginBottom: "1em",
           }}
         >
           <TextField
-            style={{ marginTop: "2em", width: "100%", maxWidth: "90vw" }}
-            value={user.userName}
-            onChange={handleChange}
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginTop: "2em",
+              width: "100%",
+              maxWidth: "16.5em",
+            }}
+            value={props.userName}
+            onChange={props.onChange}
             id="outlined-basic"
             label="Search"
             variant="outlined"
@@ -61,9 +48,9 @@ function SearchUser() {
             type="text"
           />
         </div>
-        <div>
+        {/* <div>
           <div style={{ flexDirection: "column" }}>
-            {user.userName === "" ? (
+            {props.userName === "" ? (
               <></>
             ) : (
               found.map((elem) => {
@@ -104,9 +91,8 @@ function SearchUser() {
               })
             )}
           </div>
-        </div>
+        </div> */}
       </div>
-      <FloatingBTN />
     </div>
   );
 }

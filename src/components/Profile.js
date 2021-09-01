@@ -33,18 +33,23 @@ function Profile(props) {
         <span
           style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom: "2em" }}
         >
-          @{loggedInUser.user.profileName}
+          @Profile
         </span>
       </div>
       <div className="d-flex flex-column-reverse bd-highlight">
         {status.map((elem, i) => {
           for (let y = 0; y <= elem.like.length; y++) {
-            console.log("elem.like -> ", elem.like);
-
             let count = 0;
-            elem.like.forEach((item, index) => {
+            let countLikes = 0;
+            elem.like.forEach((item) => {
               if (item === loggedInUser.user.profileName) {
                 count++;
+              }
+            });
+
+            elem.like.forEach((likes) => {
+              if (likes) {
+                countLikes++;
               }
             });
 
@@ -69,8 +74,16 @@ function Profile(props) {
                   addLocation={elem.addLocation}
                   postImgURL={elem.postImgURL}
                   description={elem.description}
+                  countLikes={countLikes}
                   tagUser={
-                    <span>{elem.tagUser ? elem.tagUser + "" : null}</span>
+                    elem.tagUser[0] ? (
+
+                        <span className="font">User tagged:
+                        {elem.tagUser.map((tag) => (
+                          <li>{tag}</li>
+                        ))}
+                        </span>
+                    ) : <></>
                   }
                 />
               </div>
