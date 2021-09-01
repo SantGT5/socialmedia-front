@@ -1,26 +1,24 @@
-import { useParams, useHistory } from "react-router";
-import { useEffect } from "react";
-import api from "../../apis/api";
+// import { useParams, useHistory } from "react-router";
+// import { useEffect } from "react";
+// import api from "../../apis/api";
 
-function LikePost() {
-  const params = useParams();
-  const history = useHistory();
+// function LikePost() {
+//   const params = useParams();
+//   const history = useHistory();
 
-  useEffect(() => {
-    async function fetchLike() {
-      try {
-        const reponse = await api.post(`/likedpost/${params.id}`);
+//   useEffect(() => {
+//     async function fetchLike() {
+//       try {
+//         const reponse = await api.post(`/likedpost/${params.id}`);
+//         history.goBack();
+//       } catch (err) {
+//         console.log(err.reponse);
+//       }
+//     }
+//     fetchLike();
+//   }, []);
 
-        console.log("response dentro do LikePost -> ", reponse);
-        history.goBack();
-      } catch (err) {
-        console.log(err.reponse);
-      }
-    }
-    fetchLike();
-  }, []);
+//   return <></>;
+// }
 
-  return <></>;
-}
-
-export default LikePost;
+// export default LikePost;

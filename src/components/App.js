@@ -11,28 +11,33 @@ import EditUser from "./EditUser";
 import Home from "./Home";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
-import LikePost from "./GlobalComponents/LikePost";
+// import LikePost from "./GlobalComponents/LikePost";
 import DeletePost from "./GlobalComponents/DeletePost";
 import UserProfile from "./UserProfile";
+
+const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
 
 function App() {
   return (
     <BrowserRouter>
+    <AuthContextComponent>
     <Switch>
-        <AuthContextComponent>
+        
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/personal-info" component={PersonalInfo} />
-          <Route path="/edit/:id" component={EditUser} />
+          <PrivateRoute path="/edit/:id" component={EditUser} />
           <Route path="/signup" component={Signup} />
-          <Route exact path="/newpost" component={NewPost} />
+          <PrivateRoute exact path="/newpost" component={NewPost} />
           <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/likedpost/:id" component={LikePost} />
+          <PrivateRoute path="/profile" component={Profile} />
+          {/* <PrivateRoute path="/likedpost/:id" component={LikePost} /> */}
           <Route path="/userprofile/:profileName" component={UserProfile} />
-          <Route path="/deletepost/:id" component={DeletePost} />
-          <Redirect exact from="/login" to="/" />
-        </AuthContextComponent>
-      </Switch>      
+          <PrivateRoute path="/deletepost/:id" component={DeletePost} />
+          
+          
+      </Switch>
+      </AuthContextComponent>
     </BrowserRouter>
   );
 }

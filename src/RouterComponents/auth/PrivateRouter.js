@@ -11,22 +11,19 @@ function ProtectedRoute(props) {
   const Component = component;
   delete propsClone.component;
 
+console.log("Component -> ",Component)
+
   return (
     <Route
       {...propsClone}
       render={(routeProps) => {
 
-        if (loggedInUser.user._id || loggedInUser._id){
-          return <Component {...routeProps} />;
+        console.log("routeProps.location -> ", routeProps)
+
+        if ( loggedInUser.user._id ){
+          return <Component />;
         } else {
-          return (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: routeProps.location },
-              }}
-            />
-          );
+          return <Redirect to="/login" />
         }
       }}
     />

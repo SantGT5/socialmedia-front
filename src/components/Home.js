@@ -58,6 +58,11 @@ function Home() {
     fetchUser();
   }, [user.userName]);
 
+
+
+
+
+
   return (
     <div style={{ marginBottom: "4em" }}>
       <div style={{ display: "flex", alignItems: "center", width: "100%" }}>

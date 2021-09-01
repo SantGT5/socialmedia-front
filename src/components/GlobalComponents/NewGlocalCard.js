@@ -34,6 +34,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { styled } from "@material-ui/core/styles";
+import api from "../../apis/api";
 
 const options = ["Delete"];
 const ITEM_HEIGHT = 48;
@@ -54,6 +55,8 @@ const ExpandMore = styled((props) => {
 }));
 
 function NewGlobalCard(props) {
+  const storedUser = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(storedUser || '""');
   const history = useHistory();
   const [expanded, setExpanded] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -121,9 +124,19 @@ function NewGlobalCard(props) {
     setExpanded(!expanded);
   };
 
-  const storedUser = localStorage.getItem("loggedInUser");
-  const loggedInUser = JSON.parse(storedUser || '""');
 
+  async function handleClickLike(){
+    try{
+  
+      const reponse = await api.post(`/likedpost/${props.like}`);
+      window.location.reload();
+    }catch( err ){
+      console.log(err.response)
+    }
+  }
+
+
+  
   return (
     <div
       className="card"
@@ -196,15 +209,13 @@ function NewGlobalCard(props) {
       <div style={{ display: "flex" }}>
         <div className="post_footer">
           <div className="d-flex">
-            <Link to={`/likedpost/${props.like}`}>
-              <IconButton aria-label="add to favorites">
+              <IconButton aria-label="add to favorites" onClick={handleClickLike}>
                 {props.likeResult === true ? (
                   <FavoriteIcon style={{ color: "red", fontSize: "1.4em" }} />
                 ) : (
                   <FavoriteBorderIcon style={{ fontSize: "1.4em" }} />
                 )}
               </IconButton>
-            </Link>
 
             <IconButton
               aria-label="more"
