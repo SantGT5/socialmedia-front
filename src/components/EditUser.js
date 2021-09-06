@@ -53,11 +53,16 @@ function EditUser(props) {
     imgUserURL: "",
   });
 
+
+  console.log("status -> ", status)
+
   const arrGender = ["Male", "Female", "Other"];
   const [open, setOpen] = React.useState(false);
   const [error, setErro] = useState(null);
   const [mensage, setMensage] = React.useState(false);
   const [img, setImg] = useState({ file: null, imgUser: null });
+
+
 
   const storedUser = localStorage.getItem("loggedInUser");
   const loggedInUser = JSON.parse(storedUser || '""');
@@ -158,7 +163,7 @@ function EditUser(props) {
         <div className="container">
           <Avatar
             style={{ width: "6.5em", height: "6.5em" }}
-            src={img.file ? img.file : imgUser}
+            src={img.file !== null ? img.file  :  status.imgUserURL }
           />
           <AddPhotoBTN onChange={handleImage} />
 
