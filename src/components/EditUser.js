@@ -1,7 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
 import { useState, useEffect } from "react";
 import api from "../apis/api";
-
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -9,7 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from "@material-ui/icons/Email";
 import React from "react";
-
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -17,15 +15,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Alert, AlertTitle } from "@material-ui/lab";
-
+import imgUser from "../img/pngwing.com.png";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import Button from "@material-ui/core/Button";
 import ClearIcon from "@material-ui/icons/Clear";
-
 import Snackbar from "@material-ui/core/Snackbar";
-
 import { useHistory, useParams } from "react-router";
-
 import AddPhotoBTN from "./GlobalComponents/AddPhotoBTN";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,11 +72,11 @@ function EditUser(props) {
   };
 
   async function handleFileUpload(file) {
-    if(file) {
+    if (file) {
       const uploadData = new FormData();
 
       uploadData.append("imgUser", file);
-      
+
       const response = await api.post("/uploaduser", uploadData);
 
       return response.data.url;
@@ -101,8 +96,6 @@ function EditUser(props) {
     async function fetchEdit() {
       try {
         const response = await api.get("/profile");
-
-// delete response.data._id
         setStatus({ ...response.data });
       } catch (err) {
         console.log(err);
@@ -134,8 +127,11 @@ function EditUser(props) {
 
       localStorage.setItem(
         "loggedInUser",
-        JSON.stringify(  {token: loggedInUser.token, user : {...status, imgUserURL} } )
-        )
+        JSON.stringify({
+          token: loggedInUser.token,
+          user: { ...status, imgUserURL },
+        })
+      );
 
       setMensage(true);
       setErro(null);
@@ -162,7 +158,7 @@ function EditUser(props) {
         <div className="container">
           <Avatar
             style={{ width: "6.5em", height: "6.5em" }}
-            src={img.file ? img.file : status.imgUserURL}
+            src={img.file ? img.file : imgUser}
           />
           <AddPhotoBTN onChange={handleImage} />
 
@@ -225,7 +221,11 @@ function EditUser(props) {
             <div>
               <select
                 className="container form-select"
-                style={{ marginTop: "2em", width: "10em", backgroundColor:"#ebebeb" }}
+                style={{
+                  marginTop: "2em",
+                  width: "10em",
+                  backgroundColor: "#ebebeb",
+                }}
                 aria-label="Default select example"
                 value={status.gender}
                 onChange={handleChange}

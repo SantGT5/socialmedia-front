@@ -1,5 +1,5 @@
 import "../App.css";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "../RouterComponents/auth/PrivateRouter";
 import { AuthContextComponent } from "../contexts/authContext";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,13 +11,9 @@ import EditUser from "./EditUser";
 import Home from "./Home";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
-// import LikePost from "./GlobalComponents/LikePost";
 import DeletePost from "./GlobalComponents/DeletePost";
 import UserProfile from "./UserProfile";
 import Mensage from "./Mensage";
-
-// const storedUser = localStorage.getItem("loggedInUser");
-// const loggedInUser = JSON.parse(storedUser || '""');
 
 function App() {
   return (
@@ -32,7 +28,6 @@ function App() {
           <Route path="/login" component={Login} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/mensage" component={Mensage} />
-          {/* <PrivateRoute path="/likedpost/:id" component={LikePost} /> */}
           <Route path="/userprofile/:profileName" component={UserProfile} />
           <PrivateRoute path="/deletepost/:id" component={DeletePost} />
         </Switch>

@@ -15,7 +15,7 @@ export default function CheckboxesTags(props) {
   const [tag, setTag] = useState([]);
 
   const mapTags = tag.map((elem, i) => {
-    return elem.profileName
+    return elem.profileName;
   });
 
   useEffect(() => {

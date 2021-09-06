@@ -3,7 +3,7 @@ import api from "../apis/api";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import FloatingBTN from "../components/GlobalComponents/FloatingBTN";
-
+import imgUser from "../img/pngwing.com.png";
 import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
 
 function UserProfile() {
@@ -32,64 +32,75 @@ function UserProfile() {
         <span
           style={{ fontSize: "1.5em", marginTop: "0.2em", marginBottom: "2em" }}
         >
-          {userprofile[0] ? "@" + userprofile[0].userProfileName : null}
+          {"@" + profileName}
         </span>
       </div>
-      <div className="d-flex flex-column-reverse bd-highlight">
-        {userprofile.map((elem, i) => {
-          for (let y = 0; y <= elem.like.length; y++) {
-            let count = 0;
-            let countLikes = 0;
-            elem.like.forEach((item) => {
-              if (item === loggedInUser.user.profileName) {
-                count++;
-              }
-            });
 
-            elem.like.forEach((likes) => {
-              if (likes) {
-                countLikes++;
-              }
-            });
+      {userprofile[0] ? (
+        <div className="d-flex flex-column-reverse bd-highlight">
+          {userprofile.map((elem, i) => {
+            for (let y = 0; y <= elem.like.length; y++) {
+              let count = 0;
+              let countLikes = 0;
+              elem.like.forEach((item) => {
+                if (item === loggedInUser.user.profileName) {
+                  count++;
+                }
+              });
 
-            return (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "1.5em",
-                }}
-              >
-                <NewGlobalCard
-                  like={elem._id}
-                  className="p-2 bd-highlight"
-                  likeResult={count > 0 ? true : false}
-                  loggedInUser={elem.userProfileName}
-                  id={elem._id}
-                  imgUser={elem.imgUser}
-                  share={elem.postImgURL}
-                  userProfileName={elem.userProfileName}
-                  addLocation={elem.addLocation}
-                  postImgURL={elem.postImgURL}
-                  description={elem.description}
-                  countLikes={countLikes}
-                  tagUser={
-                    elem.tagUser[0] ? (
+              elem.like.forEach((likes) => {
+                if (likes) {
+                  countLikes++;
+                }
+              });
 
-                        <span className="font">User tagged:
-                        {elem.tagUser.map((tag) => (
-                          <li>{tag}</li>
-                        ))}
+              return (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: "1.5em",
+                  }}
+                >
+                  <NewGlobalCard
+                    like={elem._id}
+                    className="p-2 bd-highlight"
+                    likeResult={count > 0 ? true : false}
+                    loggedInUser={elem.userProfileName}
+                    id={elem._id}
+                    imgUser={elem.imgUser ? elem.imgUser : imgUser}
+                    share={elem.postImgURL}
+                    userProfileName={elem.userProfileName}
+                    addLocation={elem.addLocation}
+                    postImgURL={elem.postImgURL}
+                    description={elem.description}
+                    countLikes={countLikes}
+                    tagUser={
+                      elem.tagUser[0] ? (
+                        <span className="font">
+                          User tagged:
+                          {elem.tagUser.map((tag) => (
+                            <li>{tag}</li>
+                          ))}
                         </span>
-                    ) : <></>
-                  }
-                />
-              </div>
-            );
-          }
-        })}
-      </div>
+                      ) : (
+                        <></>
+                      )
+                    }
+                  />
+                </div>
+              );
+            }
+          })}
+        </div>
+      ) : (
+        <div style={{ textAlign: "center", marginTop: "1.5em" }}>
+          <i style={{ fontSize: "2.5em" }} className="fas fa-camera"></i>
+          <h1>No post yet</h1>
+        </div>
+      )}
+
       <FloatingBTN />
     </div>
   );

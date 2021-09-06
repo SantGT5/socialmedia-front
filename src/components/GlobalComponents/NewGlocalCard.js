@@ -23,7 +23,6 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { Link } from "react-router-dom";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import ListItem from "@material-ui/core/ListItem";
@@ -124,19 +123,15 @@ function NewGlobalCard(props) {
     setExpanded(!expanded);
   };
 
-
-  async function handleClickLike(){
-    try{
-  
+  async function handleClickLike() {
+    try {
       const reponse = await api.post(`/likedpost/${props.like}`);
       window.location.reload();
-    }catch( err ){
-      console.log(err.response)
+    } catch (err) {
+      console.log(err.response);
     }
   }
 
-
-  
   return (
     <div
       className="card"
@@ -209,13 +204,13 @@ function NewGlobalCard(props) {
       <div style={{ display: "flex" }}>
         <div className="post_footer">
           <div className="d-flex">
-              <IconButton aria-label="add to favorites" onClick={handleClickLike}>
-                {props.likeResult === true ? (
-                  <FavoriteIcon style={{ color: "red", fontSize: "1.4em" }} />
-                ) : (
-                  <FavoriteBorderIcon style={{ fontSize: "1.4em" }} />
-                )}
-              </IconButton>
+            <IconButton aria-label="add to favorites" onClick={handleClickLike}>
+              {props.likeResult === true ? (
+                <FavoriteIcon style={{ color: "red", fontSize: "1.4em" }} />
+              ) : (
+                <FavoriteBorderIcon style={{ fontSize: "1.4em" }} />
+              )}
+            </IconButton>
 
             <IconButton
               aria-label="more"

@@ -1,6 +1,6 @@
 import NavBar from "../components/GlobalComponents/NavBar";
-import FloatingBTN from "../components/GlobalComponents/FloatingBTN"
-import { Link } from "react-router-dom"
+import FloatingBTN from "../components/GlobalComponents/FloatingBTN";
+import { Link } from "react-router-dom";
 
 function Mensage() {
   return (
@@ -26,7 +26,13 @@ function Mensage() {
           marginTop: "4em",
         }}
       >
-        <h1>Click <Link style={{ textDecoration:"none" }} to="/">here</Link> to continue</h1>
+        <h1>
+          Click{" "}
+          <Link style={{ textDecoration: "none" }} to="/">
+            here
+          </Link>{" "}
+          to continue
+        </h1>
       </div>
       <FloatingBTN />
     </div>

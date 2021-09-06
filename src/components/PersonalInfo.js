@@ -1,7 +1,6 @@
 import NavBar from "./GlobalComponents/NavBar";
 import api from "../apis/api";
 import FloatingBTN from "../components/GlobalComponents/FloatingBTN";
-
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -14,6 +13,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { isJwtExpired } from "jwt-check-expiration";
 import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
+import img from "../img/pngwing.com.png"
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -69,7 +69,7 @@ function PersonalInfo() {
       <div className="container">
         <Avatar
           style={{ width: "6.5em", height: "6.5em" }}
-          src={profile.imgUserURL ? profile.imgUserURL : "/broken-image.jpg"}
+          src={profile.imgUserURL ? profile.imgUserURL : img}
         />
 
         <div className={classes.margin}>

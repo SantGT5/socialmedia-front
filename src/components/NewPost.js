@@ -107,11 +107,8 @@ function NewPost() {
 
   async function handleFileUpload(file) {
     const uploadData = new FormData();
-
     uploadData.append("postImg", file);
-
     const response = await api.post("/upload", uploadData);
-
     return response.data.url;
   }
 
@@ -133,9 +130,7 @@ function NewPost() {
       }
 
       let location = value === null ? "" : value.description;
-
       const postImgURL = await handleFileUpload(img.postImg);
-
       const response = await api.post(`/newpost`, {
         ...des,
         addLocation: location,
@@ -162,134 +157,126 @@ function NewPost() {
   };
 
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <div>
         <NavBar />
       </div>
-<div style={{ display: "flex", justifyContent:"center" }}>
-      <div
-        style={{ marginBottom: "0.6em" }}
-        className="newPost flex-column bd-highlight mb-3"
-      >
-        {/* <GlobalCard
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{ marginBottom: "0.6em" }}
+          className="newPost flex-column bd-highlight mb-3"
+        >
+          {/* <GlobalCard
     image={ img.file ? img.file : userImg }
     /> */}
 
-        {img.file ? (
-          <img
-            className="imgNewPost"
-            src={img.file}
-            alt="Your preview file selected"
-          />
-        ) : (
-          <></>
-        )}
-      
+          {img.file ? (
+            <img
+              className="imgNewPost"
+              src={img.file}
+              alt="Your preview file selected"
+            />
+          ) : (
+            <></>
+          )}
 
-
-
-
-            <div className={classes.root}>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                multiple
-                type="file"
-                onChange={handleImage}
-              />
-              <label htmlFor="contained-button-file">
-                <Button
-                  style={{
-                    borderRadius: "20px",
-                    height: "4em",
-                    marginBottom: "2em",
-                  }}
-                  variant="contained"
-                  color="primary"
-                  component="span"
-                >
-                  <AddAPhotoIcon style={{ height: "1.3em", width: "11.2em" }} />
-                </Button>
-              </label>
-            </div>
-
-            {error ? (
-              <div
+          <div className={classes.root}>
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={handleImage}
+            />
+            <label htmlFor="contained-button-file">
+              <Button
                 style={{
-                  width: "19.5em",
+                  borderRadius: "20px",
+                  height: "4em",
                   marginBottom: "2em",
-                  display: "flex",
-                  justifyContent: "center",
                 }}
+                variant="contained"
+                color="primary"
+                component="span"
               >
-                <Alert severity="warning">
-                  <AlertTitle>Warning</AlertTitle> {error} —{" "}
-                  <strong>check it out!</strong>
-                </Alert>
-              </div>
-            ) : (
-              <></>
-            )}
+                <AddAPhotoIcon style={{ height: "1.3em", width: "11.2em" }} />
+              </Button>
+            </label>
+          </div>
 
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
+          {error ? (
+            <div
+              style={{
+                width: "19.5em",
+                marginBottom: "2em",
+                display: "flex",
+                justifyContent: "center",
               }}
-              noValidate
-              autoComplete="off"
             >
-              <div className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "18.7em", marginBottom: "1em" }}
-                  id="outlined-multiline-static"
-                  label="Description"
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  onChange={handleChangeDes}
-                  name="description"
-                  value={des.description}
+              <Alert severity="warning">
+                <AlertTitle>Warning</AlertTitle> {error} —{" "}
+                <strong>check it out!</strong>
+              </Alert>
+            </div>
+          ) : (
+            <></>
+          )}
+
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div className={classes.root} noValidate autoComplete="off">
+              <TextField
+                style={{ width: "18.7em", marginBottom: "1em" }}
+                id="outlined-multiline-static"
+                label="Description"
+                multiline
+                rows={4}
+                variant="outlined"
+                onChange={handleChangeDes}
+                name="description"
+                value={des.description}
+              />
+            </div>
+          </Box>
+
+          <div className="p-2 bd-highlight" style={{ marginBottom: "1em" }}>
+            <GoogleLocation value={value} setValue={setValue} />
+          </div>
+
+          <div className="p-2 bd-highlight" style={{ marginBottom: "1em" }}>
+            <UserTag onChange={handleChange} />
+          </div>
+
+          <div className={classes.rootSuccess}>
+            <div className={classes.wrapper}>
+              <Button
+                style={{ borderRadius: "15px" }}
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={buttonClassname}
+                disabled={loading}
+                endIcon={<PublishIcon />}
+              >
+                Post
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  className={classes.buttonProgress}
                 />
-              </div>
-            </Box>
-
-            <div className="p-2 bd-highlight" style={{ marginBottom: "1em" }}>
-              <GoogleLocation value={value} setValue={setValue} />
+              )}
             </div>
-
-            <div className="p-2 bd-highlight" style={{ marginBottom: "1em" }}>
-              <UserTag onChange={handleChange} />
-            </div>
-
-            <div className={classes.rootSuccess}>
-              <div className={classes.wrapper}>
-                <Button
-                  style={{ borderRadius: "15px" }}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={buttonClassname}
-                  disabled={loading}
-                  endIcon={<PublishIcon />}
-                >
-                  Post
-                </Button>
-                {loading && (
-                  <CircularProgress
-                    size={24}
-                    className={classes.buttonProgress}
-                  />
-                )}
-
-            </div>
-            </div>
-
+          </div>
+        </div>
       </div>
-      
-      </div>
-      
     </form>
   );
 }

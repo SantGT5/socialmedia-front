@@ -4,11 +4,10 @@ import api from "../apis/api";
 import NavBar from "./GlobalComponents/NavBar";
 import FloatingBTN from "./GlobalComponents/FloatingBTN";
 import { isJwtExpired } from "jwt-check-expiration";
-
 import NewGlobalCard from "./GlobalComponents/NewGlocalCard";
 import SearchUser from "./SearchUser";
 import { Link } from "react-router-dom";
-
+import img from "../img/pngwing.com.png";
 import Avatar from "@material-ui/core/Avatar";
 
 function Home() {
@@ -16,12 +15,8 @@ function Home() {
   const loggedInUser = JSON.parse(storedUser || '""');
   const [allpost, setAllPost] = useState([]);
   const history = useHistory();
-
   const [user, setUser] = useState({ userName: "" });
-
   const [found, setFound] = useState([]);
-
-  console.log(allpost);
 
   const handleChange = (event) => {
     setUser({ [event.currentTarget.name]: event.currentTarget.value });
@@ -112,7 +107,7 @@ function Home() {
                       likeResult={count > 0 ? true : false}
                       loggedInUser={elem.userProfileName}
                       id={elem._id}
-                      imgUser={elem.imgUser}
+                      imgUser={elem.imgUser ? elem.imgUser : img}
                       share={elem.postImgURL}
                       userProfileName={elem.userProfileName}
                       addLocation={elem.addLocation}
