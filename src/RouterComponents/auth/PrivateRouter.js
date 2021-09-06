@@ -17,7 +17,7 @@ function ProtectedRoute(props) {
       render={(routeProps) => {
         console.log("loggedInUser PrivateRouter -> ", loggedInUser);
 
-        if (loggedInUser.user) {
+        if (loggedInUser.user._id) {
           return <Component {...routeProps} />;
         } else {
           return <Redirect to="/login" />;
