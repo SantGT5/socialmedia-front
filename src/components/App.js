@@ -14,6 +14,7 @@ import Profile from "./Profile";
 // import LikePost from "./GlobalComponents/LikePost";
 import DeletePost from "./GlobalComponents/DeletePost";
 import UserProfile from "./UserProfile";
+import Mensage from "./Mensage";
 
 // const storedUser = localStorage.getItem("loggedInUser");
 // const loggedInUser = JSON.parse(storedUser || '""');
@@ -30,6 +31,7 @@ function App() {
           <PrivateRoute exact path="/newpost" component={NewPost} />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/mensage" component={Mensage} />
           {/* <PrivateRoute path="/likedpost/:id" component={LikePost} /> */}
           <Route path="/userprofile/:profileName" component={UserProfile} />
           <PrivateRoute path="/deletepost/:id" component={DeletePost} />
