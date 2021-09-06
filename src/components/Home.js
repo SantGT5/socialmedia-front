@@ -73,7 +73,7 @@ function Home() {
       </div>
 
       {user.userName === "" ? (
-        <div>
+        <div className="d-flex flex-column-reverse bd-highlight">
           <div className="d-flex justify-content-center">
             <span
               style={{

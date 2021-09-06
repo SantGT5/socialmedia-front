@@ -14,15 +14,16 @@ function AuthContextComponent(props) {
     }
   }, []);
 
-  function logoff() {
-    setLoggedInUser({ user: {}, token: "" });
-    localStorage.removeItem("loggedInUser");
-  }
-  
+  // function logoff() {
+  //   setLoggedInUser({ user: {}, token: "" });
+  //   localStorage.removeItem("loggedInUser");
+  // }
+
+
   console.log("VALOR ATUAL DO CONTEXT =>", loggedInUser);
 
   return (
-    <authContext.Provider value={{ loggedInUser, setLoggedInUser, logoff }}>
+    <authContext.Provider value={{ loggedInUser, setLoggedInUser }}>
       {props.children}
     </authContext.Provider>
   );

@@ -15,15 +15,14 @@ import Profile from "./Profile";
 import DeletePost from "./GlobalComponents/DeletePost";
 import UserProfile from "./UserProfile";
 
-const storedUser = localStorage.getItem("loggedInUser");
-  const loggedInUser = JSON.parse(storedUser || '""');
+// const storedUser = localStorage.getItem("loggedInUser");
+// const loggedInUser = JSON.parse(storedUser || '""');
 
 function App() {
   return (
     <BrowserRouter>
-    <AuthContextComponent>
-    <Switch>
-        
+      <AuthContextComponent>
+        <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/personal-info" component={PersonalInfo} />
           <PrivateRoute path="/edit/:id" component={EditUser} />
@@ -34,9 +33,7 @@ function App() {
           {/* <PrivateRoute path="/likedpost/:id" component={LikePost} /> */}
           <Route path="/userprofile/:profileName" component={UserProfile} />
           <PrivateRoute path="/deletepost/:id" component={DeletePost} />
-          
-          
-      </Switch>
+        </Switch>
       </AuthContextComponent>
     </BrowserRouter>
   );

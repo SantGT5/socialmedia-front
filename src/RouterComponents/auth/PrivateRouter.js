@@ -6,22 +6,23 @@ import { authContext } from "../../contexts/authContext";
 function ProtectedRoute(props) {
   const { loggedInUser } = useContext(authContext);
 
+// const storedUser = localStorage.getItem("loggedInUser");
+// const loggedInUser = JSON.parse(storedUser || '""');
+
   const propsClone = { ...props };
   const { component } = propsClone;
   const Component = component;
   delete propsClone.component;
-
-console.log("Component -> ",Component)
 
   return (
     <Route
       {...propsClone}
       render={(routeProps) => {
 
-        console.log("routeProps.location -> ", routeProps)
+        console.log("loggedInUser PrivateRouter -> ", loggedInUser)
 
-        if ( loggedInUser.user._id ){
-          return <Component />;
+        if ( loggedInUser.user ){
+          return <Component {...routeProps} />;
         } else {
           return <Redirect to="/login" />
         }

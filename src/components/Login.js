@@ -37,7 +37,6 @@ function Login(props) {
 
       // Atualizando o state do Context para que todos os componentes tenham acesso ao usuário logado
       setLoggedInUser({ ...response.data });
-      console.log("setLoggedInUser -> ", response.data);
       // Salvando o usuário no localStorage para persistir a informação no computador do usuário, dessa forma, o usuário pode fechar a janela do site e ainda assim permanecerá logado
       localStorage.setItem(
         "loggedInUser",
