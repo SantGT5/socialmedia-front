@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-const authContext = createContext({ user: {}, token: "" });
+const authContext = createContext();
 
 function AuthContextComponent(props) {
   const [loggedInUser, setLoggedInUser] = useState({ user: {}, token: "" });
@@ -19,13 +19,14 @@ function AuthContextComponent(props) {
   //   localStorage.removeItem("loggedInUser");
   // }
 
-
   console.log("VALOR ATUAL DO CONTEXT =>", loggedInUser);
 
   return (
-    <authContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-      {props.children}
-    </authContext.Provider>
+
+        <authContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+          {props.children}
+        </authContext.Provider>
+
   );
 }
 

@@ -1,10 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
-
 import { authContext } from "../../contexts/authContext";
+import { isJwtExpired } from "jwt-check-expiration";
 
 function ProtectedRoute(props) {
+  const [state, setState] = useState("loggedin");
   const { loggedInUser } = useContext(authContext);
+
+  // const storedUser = localStorage.getItem("loggedInUser");
+  // const loggedInUser = JSON.parse(storedUser || '""');
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const isValidToken = isJwtExpired(loggedInUser.token);
+
+        setState(isValidToken === false ? "loggedin" : "redirect");
+      } catch {}
+    })();
+  }, []);
 
   const propsClone = { ...props };
   const { component } = propsClone;
@@ -14,15 +28,13 @@ function ProtectedRoute(props) {
   return (
     <Route
       {...propsClone}
-      render={(routeProps) => {
-        console.log("loggedInUser PrivateRouter -> ", loggedInUser);
-
-        if (loggedInUser.user._id) {
-          return <Component {...routeProps} />;
-        } else {
-          return <Redirect to="/login" />;
-        }
-      }}
+      render={(routeProps) =>
+        state === "loggedin" ? (
+          <Component {...routeProps} />
+        ) : (
+          <Redirect to="/login" />
+        )
+      }
     />
   );
 }
