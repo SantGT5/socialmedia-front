@@ -2,7 +2,7 @@ import TextField from "@material-ui/core/TextField";
 
 function SearchUser(props) {
   return (
-    <div>
+    <form autocomplete="off">
       <div style={{ marginLeft: "0.7em" }}>
         <div
           style={{
@@ -27,7 +27,7 @@ function SearchUser(props) {
           />
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

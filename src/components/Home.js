@@ -147,9 +147,10 @@ function Home() {
             </span>
           </div>
 
-          {found.map((elem) => {
+          {found.map((elem, i) => {
             return (
               <Link
+                key={i}
                 to={`/userprofile/${elem.profileName}`}
                 style={{
                   display: "flex",
@@ -160,6 +161,7 @@ function Home() {
               >
                 <div
                   className="borderSearch"
+                  
                   style={{
                     width: "20em",
                     display: "flex",
